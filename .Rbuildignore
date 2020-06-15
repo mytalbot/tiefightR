@@ -1,2 +1,4 @@
 ^tiefightR\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+^test_script\.R$
