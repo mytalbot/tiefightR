@@ -16,8 +16,8 @@ Suggests: knitr,
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-URL:  
-BugReports:  
+URL: 
+BugReports: 
 Imports: magrittr,
     tibble,
     dplyr,
@@ -28,3 +28,5 @@ Imports: magrittr,
     parallel,
     foreach,
     viridis
+Depends: 
+    R (>= 2.10)

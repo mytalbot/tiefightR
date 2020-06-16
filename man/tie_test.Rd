@@ -7,7 +7,6 @@
 tie_test(
   xdata = NULL,
   R = 2,
-  cpus = 2,
   SV = NULL,
   RF = NULL,
   CF = NULL,

@@ -31,4 +31,14 @@ combination of the remaining items.
 
 ``` r
 library(tiefightR)
+raw        <- tiefightR::human
+human_test <- tie_worth(xdata = raw,
+                        showplot  = TRUE,
+                        compstudy = "LagreValenceRange_SpringSchool",
+                        default   = "War",
+                        ordn      = c("Cat", "Crow", "Doctor", "Frustrated", "Lake", "War", "Fire"),
+                        r1        = "Lake", # change this
+                        r2        = "Cat")  # change this / to multiple combis
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
