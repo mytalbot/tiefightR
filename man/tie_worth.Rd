@@ -19,6 +19,7 @@ tie_worth(
   ordn = NULL,
   r1 = NULL,
   r2 = NULL,
+  ymin = 0,
   ymax = 0.5
 )
 }
@@ -54,7 +55,7 @@ tie_worth(
 \item{ymax}{maximum y-scale of the worth plot}
 }
 \value{
-tada
+Exports the results of the worth value calculation, including the GNM analysis.
 }
 \description{
 The \code{tie_import} function prepares binary and continuous data form import into the tiefightR analysis.

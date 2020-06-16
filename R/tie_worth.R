@@ -27,7 +27,7 @@
 #' @importFrom magrittr "%>%"
 #' @import gnm
 #'
-#' @return tada
+#' @return Exports the results of the worth value calculation, including the GNM analysis.
 #'
 #' @export
 #'
@@ -46,6 +46,7 @@ tie_worth <- function(xdata     = NULL,
                       ordn      = NULL,
                       r1        = NULL,
                       r2        = NULL,
+                      ymin      = 0,
                       ymax      = 0.5){
 
 
@@ -252,7 +253,7 @@ tie_worth <- function(xdata     = NULL,
   worth    <- hwor_DS1
 
   if(showplot==TRUE){
-    plot(hwor_DS1, ylim=c(0,ymax), ylab="worth value")
+    plot(hwor_DS1, ylim=c(ymin,ymax), ylab="worth value")
   }else{}
 
 

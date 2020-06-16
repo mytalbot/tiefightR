@@ -23,4 +23,8 @@ Imports: magrittr,
     dplyr,
     reshape2,
     prefmod,
-    gnm
+    gnm,
+    ggplot2,
+    parallel,
+    foreach,
+    viridis

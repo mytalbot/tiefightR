@@ -14,7 +14,7 @@ tie_binarize(
   datalabel = "binarized",
   compiled_studies = 1,
   setseed = TRUE,
-  prefLimit = 0.5,
+  prefLimit = 50,
   sidevar = "side",
   refval = "refValue",
   oval = "otherValue",
