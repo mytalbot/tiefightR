@@ -26,6 +26,7 @@ Imports: magrittr,
     gnm,
     ggplot2,
     parallel,
+    doParallel,
     foreach,
     viridis
 Depends: 

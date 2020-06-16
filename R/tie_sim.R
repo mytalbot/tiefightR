@@ -27,6 +27,7 @@
 #' @import prefmod
 #' @import gnm
 #' @import parallel
+#' @import doParallel
 #' @import foreach
 #'
 #' @return data.frame with the simulation results

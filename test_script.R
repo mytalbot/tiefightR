@@ -1,6 +1,7 @@
 # tiefightR test sheet
 library(tiefightR)
 
+
 ############################################################################
 # Import continous data (human exmpl.)
 ############################################################################
@@ -56,7 +57,7 @@ bin_mouse  <- tie_binarize(xdata      = raw_mouse,
                            RV         = "numOF_visits_with_Licks",
                            compiled_studies	 = 1,
                            setseed    = TRUE,
-                           prefLimit  = 0.5)
+                           prefLimit  = 50)
 
 # calculate worth values w/ the binarized data
 mouse      <- tie_worth(xdata         = bin_mouse,
@@ -66,8 +67,8 @@ mouse      <- tie_worth(xdata         = bin_mouse,
                         id            = "ID",
                         RV            = "pref_img1",
                         showplot      = TRUE,
-                        ymin          = 0.16,
-                        ymax          = 0.24,
+                        ymin          = 0.10,
+                        ymax          = 0.30,
                         intrans       = TRUE,
                         compstudy     = 1,
                         default       = "HCl",
@@ -87,7 +88,7 @@ bin_mouse_2<- tie_binarize(xdata      = raw_mouse,
                            RV         = "numOF_visits_with_Licks",
                            compiled_studies	 = 2, # this was changed
                            setseed    = TRUE,
-                           prefLimit  = 0.5)
+                           prefLimit  = 50)
 
 mouse2      <- tie_worth(xdata         = bin_mouse_2,
                         SV            = "side_img1",
@@ -127,6 +128,7 @@ set.seed(123)
 testme     <- "War"
 sim_humans <- tie_sim(xdata     = raw,
                       R         = 2,
+                      cpus      = 6,
                       SV        = "side_img1",
                       RF        = "img1",
                       CF        = "img2",
@@ -135,7 +137,6 @@ sim_humans <- tie_sim(xdata     = raw,
                       intrans   = TRUE,
                       compstudy = "LagreValenceRange_SpringSchool",
                       default   = "War",
-                      cpus      = 6,
                       ord       = ord,
                       v1        = testme)
 
@@ -152,7 +153,6 @@ ord     <- c("Cat", "Crow", "Doctor", "Frustrated", "Lake", "War", "Fire")
 
 mytest  <- tie_test(xdata     = raw,
                     R         = 2,
-                    cpus      = 2,
                     SV        = "side_img1",
                     RF        = "img1",
                     CF        = "img2",
