@@ -28,7 +28,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("mytalbot/tiefightR")
 ```
-tiefightR uses the following packages as dependencies (in no particular order).
+tiefightR uses the following packages as dependencies (in no particular order):  
 magrittr, tibble, dplyr, reshape2, prefmod, gnm, ggplot2, parallel, foreach, viridis
 
 
