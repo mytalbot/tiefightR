@@ -40,7 +40,7 @@ This is a basic example which shows you how to compare an item with any combinat
 ```{r example}
 library(tiefightR)
 raw        <- tiefightR::human
-human_test <- tie_worth(xdata = raw,
+human_test <- tie_worth(xdata     = raw,
                         showplot  = TRUE,
                         compstudy = "LagreValenceRange_SpringSchool",
                         default   = "War",

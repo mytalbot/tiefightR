@@ -32,7 +32,7 @@ combination of the remaining items.
 ``` r
 library(tiefightR)
 raw        <- tiefightR::human
-human_test <- tie_worth(xdata = raw,
+human_test <- tie_worth(xdata     = raw,
                         showplot  = TRUE,
                         compstudy = "LagreValenceRange_SpringSchool",
                         default   = "War",
