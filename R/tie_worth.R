@@ -154,6 +154,9 @@ tie_worth <- function(xdata     = NULL,
   tbl <- table(dat$concat_test_name,dat$side) #to check if everything is correctly assigned
 
 
+  ##################################################################################################
+  # STOP !!!
+  ##################################################################################################
   #code which fluid was chosen
   dat$chosenfluid <- ifelse(dat$binResp==1, as.character(dat$refValue), as.character(dat$otherValue))
   dat$chosenOther <- NA
@@ -181,59 +184,8 @@ tie_worth <- function(xdata     = NULL,
     group_by(concat_test_name,side) %>%
     mutate(Trial_withSide = 1:n())
 
-  dat_leftSide         <- dat %>%
-    filter(side=="left") #specify how you indicated side
-
-
-  # casting the model frame -----------------------------------------
-
-  ## Left side
-  mdat_DS1_leftSide    <- dcast(dat_leftSide, formula = animalID ~ concat_test_name, fun.aggregate = sum,
-                                value.var = "chosenOther")[,-1]
-
-  model_DS1_leftSide   <- llbt.design(mdat_DS1_leftSide, nitems = len_ord, objnames = ordn)
-
-  model_DS1_leftSide   <- model_DS1_leftSide %>%
-    filter(g1!=1)
-
-  model_DS1_leftSide$g1<- model_DS1_leftSide$g2
-
-  model_DS1_leftSide   <- model_DS1_leftSide %>%
-    select(-g2) %>%
-    mutate(side = "left")
-
-
-  ## right side
-  dat_rightSide <- dat %>%
-    filter(side=="right")
-
-  mdat_DS1_rightSide   <- dcast(dat_rightSide, formula = animalID ~ concat_test_name, fun.aggregate = sum,
-                                value.var = "chosenOther")[,-1]
-
-  model_DS1_rightSide  <- llbt.design(mdat_DS1_rightSide, nitems = len_ord, objnames = ordn)
-
-  model_DS1_rightSide  <- model_DS1_rightSide %>% filter(g1!=1)
-
-  model_DS1_rightSide$g1 <- model_DS1_rightSide$g2
-
-  model_DS1_rightSide  <- model_DS1_rightSide %>%
-    select(-g2) %>%
-    mutate(side = "right")
-
-  ## Combining both sides
-  model_DS1_altogether <- rbind(model_DS1_rightSide,model_DS1_leftSide)
-  model_DS1_altogether <- model_DS1_altogether %>% arrange(mu)
-
-
   ### run model
   excl_ord             <- ordn[!ordn==default]
-  excl_ord_s           <- c(excl_ord,"side")
-  Formula              <- as.formula(paste("y~", paste(excl_ord_s, collapse="+")))
-
-  h1_DS1_withSide      <- gnm(Formula, ia=T, #ia set to true= dependent
-                              data = model_DS1_altogether, family =  poisson) #NOTE: War is in the intercept
-  resPlusSide          <- summary(h1_DS1_withSide)
-
 
   # model for plotting (with side removed)
   mdat_DS1             <- dcast(dat, formula = Trial ~ concat_test_name, fun.aggregate = sum,
@@ -256,12 +208,12 @@ tie_worth <- function(xdata     = NULL,
     plot(hwor_DS1, ylim=c(ymin,ymax), ylab="worth value")
   }else{}
 
-
   if(intrans==F){
-    list(dat=dat, alltogether=model_DS1_altogether, res=resNoSide, worth=worth)
+    list(dat=dat, res=resNoSide, worth=worth)
   }else{
-    list(dat=dat, alltogether=model_DS1_altogether, res=resNoSide, worth=worth, intrans=itr)
+    list(dat=dat, res=resNoSide, worth=worth, intrans=itr)
   }
+
 }
 
 

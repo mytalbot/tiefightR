@@ -21,6 +21,7 @@
 #' @importFrom reshape2 dcast
 #' @importFrom stats as.formula poisson
 #' @import dplyr
+#' @import Rmisc
 #' @import prefmod
 #' @importFrom magrittr "%>%"
 #' @import gnm
@@ -66,10 +67,10 @@ tie_test <- function(xdata     = NULL,
 
   # if the intransitivity is checked, conditional outcomes!
   if(intrans==TRUE){
-    ran      <- as.data.frame(run[4,])
-    I        <- as.numeric(run[5,])
+    ran      <- as.data.frame(run[3,])
+    I        <- as.numeric(run[4,])
   }else{
-    ran      <- as.data.frame(run[4,])
+    ran      <- as.data.frame(run[3,])
   }
 
   W          <- rowMeans(ran)
@@ -82,7 +83,7 @@ tie_test <- function(xdata     = NULL,
                            upr     = Rmisc::CI(I)[1],
                            lwr     = Rmisc::CI(I)[3])
 
-  zeigsmir  <- res[rownames(res)==testme, ]
+  zeigsmir   <- res[rownames(res)==testme, ]
   return(zeigsmir)
 }
 

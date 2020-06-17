@@ -24,7 +24,9 @@ devtools::install_github("mytalbot/tiefightR")
 tiefightR uses the following packages as dependencies (in no particular
 order):  
 magrittr, tibble, dplyr, reshape2, prefmod, gnm, ggplot2, parallel,
-foreach, viridis
+foreach, viridis, Rmisc
+
+# tidyverse\!\!\! Lazy loading
 
 ## Example
 
