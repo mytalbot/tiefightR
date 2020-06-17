@@ -1,7 +1,6 @@
 # tiefightR test sheet
 library(tiefightR)
 
-
 ############################################################################
 # Import continous data (human exmpl.)
 ############################################################################
@@ -127,7 +126,7 @@ set.seed(123)
 
 testme     <- "War"
 sim_humans <- tie_sim(xdata     = raw,
-                      R         = 2,
+                      R         = 15,
                       cpus      = 6,
                       SV        = "side_img1",
                       RF        = "img1",
