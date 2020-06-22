@@ -7,7 +7,8 @@ Authors@R: c(
     person("Dana", "Pfefferle", email = "DPfefferle@dpz.eu", role = c("aut") ) ,
     person("Lewejojann", "Lars", email = "ljohann@phenotyping.de", role = "aut" ))
 Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
-Description: We do great stuff!
+Description: The tiefightR package is for preference testing. Its goal is to rank commodity positions
+    obtained from preference test experiments. Special attention is laid to intransitivities in the data and tie evaluation.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -16,8 +17,8 @@ Suggests: knitr,
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-URL: 
-BugReports: 
+URL: https://github.com/mytalbot/tiefightR
+BugReports: https://github.com/mytalbot/tiefightR/issues
 Imports: magrittr,
     tibble,
     dplyr,

@@ -100,7 +100,7 @@ P <- tie_rwrap(dat        = tiefightR::mouse,
                prefLimit  = 50,
                setseed    = FALSE,
                compstudy  = 1,
-               R          = 150)
+               R          = 3)
 print(P$p1)    
 print(P$p2)  
 ```
@@ -128,7 +128,7 @@ bin_mouse  <- tie_binarize(xdata      = tiefightR::mouse,
                            prefLimit  = 50)
 
 mytest  <- tie_test(xdata      = bin_mouse,
-                    R          = 50,
+                    R          = 3,
                     intrans    = TRUE,
                     compstudy  = 1,
                     default    = "HCl",
@@ -139,7 +139,6 @@ mytest  <- tie_test(xdata      = bin_mouse,
 
 mytest
 ```
-
 
 NaCl is positioned on position 2 (which is the truth, with HCl in position 1). Adding more items can lower the intransitivity (but depends on the individual intransitivities in the data set).
 

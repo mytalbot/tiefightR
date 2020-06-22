@@ -66,7 +66,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/mytalbot/tiefightR/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -84,7 +91,7 @@
             
             <h4 class="date">2020-06-22</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/mytalbot/tiefightR/blob/master/vignettes/tiefightR_Vignette.Rmd"><code>vignettes/tiefightR_Vignette.Rmd</code></a></small>
       <div class="hidden name"><code>tiefightR_Vignette.Rmd</code></div>
 
     </div>
@@ -148,7 +155,7 @@ Concept of the Euclidean distance measurement between worth values.
 <a href="#testing-single-commodities" class="anchor"></a>Testing single commodities</h2>
 <p>With this knowledge, individual items from the commodity list can be tested. The tie_test function was specifically designed to test individual combinations. For example, if the position of the NaCl item is to be tested (e.g., at 50 randomizations), the user combines this with any other item combination from the list. As a further criterion (and sign of good quality), the intransitivity is computed as well. The user can add more items to the tested “against” list for getting more confidence in the positioning of the tested item (hopefully, with lower intransitivity).</p>
 <pre><code>#&gt;      against worth pos intrans I_sd  upr   lwr
-#&gt; NaCl     HCl 0.196   2   31.18 3.24 32.1 30.26</code></pre>
+#&gt; NaCl     HCl  0.19   2   35.33 2.08 40.5 30.16</code></pre>
 <p>NaCl is positioned on position 2 (which is the truth, with HCl in position 1). Adding more items can lower the intransitivity (but depends on the individual intransitivities in the data set).</p>
 </div>
   </div>
