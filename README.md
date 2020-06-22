@@ -36,8 +36,10 @@ You can install the development version from
 devtools::install_github("mytalbot/tiefightR")
 ```
 
-… or download the source file for easy installation from within R (or
-RStudio) if you don’t have devtools available.
+… or download the [source
+file](https://github.com/mytalbot/tiefightR/tree/master/sourcefiles) for
+easy installation from within R (or RStudio) if you don’t have devtools
+available.
 
 **tiefightR** uses the following package as dependencies (in no
 particular order). Installing tiefightR will usually take care of this.
