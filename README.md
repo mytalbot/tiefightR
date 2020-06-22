@@ -54,6 +54,10 @@ the missing ones.
 install.packages("paste missing package name here ")
 ```
 
+## The Website and Vignette(s)
+
+…can be found [here](https://talbotsr.com/tiefightR/).
+
 ## Example
 
 This is a basic example which shows how to compare an item with any
