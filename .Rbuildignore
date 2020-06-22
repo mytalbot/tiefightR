@@ -5,3 +5,4 @@
 ^test_distances\.R$
 ^docs$
 ^pkgdown$
+^sourcefiles$
