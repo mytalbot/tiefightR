@@ -95,6 +95,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/tiefightR_Vignette.html">tiefight R Vignette</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -122,12 +134,7 @@
 
     <pre class="usage"><span class='fu'>tie_test</span>(
   <span class='kw'>xdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>SV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>RF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>CF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>RV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>R</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>intrans</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>compstudy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -143,6 +150,22 @@
     <tr>
       <th>xdata</th>
       <td><p>imported (binarized) data frame</p></td>
+    </tr>
+    <tr>
+      <th>intrans</th>
+      <td><p>calculate intransitivities (calculation intense!)</p></td>
+    </tr>
+    <tr>
+      <th>compstudy</th>
+      <td><p>label of the compiled sub study (used for filtering)</p></td>
+    </tr>
+    <tr>
+      <th>default</th>
+      <td><p>default item in worth value estimation (usually the lowest worth value)</p></td>
+    </tr>
+    <tr>
+      <th>esti</th>
+      <td><p>worth estimator (default, "worth", alt: "estimator")</p></td>
     </tr>
     <tr>
       <th>SV</th>
@@ -163,22 +186,6 @@
     <tr>
       <th>RV</th>
       <td><p>name of the response variable</p></td>
-    </tr>
-    <tr>
-      <th>intrans</th>
-      <td><p>calculate intransitivities (calculation intense!)</p></td>
-    </tr>
-    <tr>
-      <th>compstudy</th>
-      <td><p>label of the compiled sub study (used for filtering)</p></td>
-    </tr>
-    <tr>
-      <th>default</th>
-      <td><p>default item in worth value estimation (usually the lowest worth value)</p></td>
-    </tr>
-    <tr>
-      <th>esti</th>
-      <td><p>worth estimator (default, "worth", alt: "estimator")</p></td>
     </tr>
     <tr>
       <th>r1</th>

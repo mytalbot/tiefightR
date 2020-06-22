@@ -9,7 +9,22 @@
 
 <!-- badges: end -->
 
-The goal of tiefightR is to …
+The goal of tiefightR is to rank commodity positions obtained from
+preference test experiments.
+
+**Preference tests** are a straightforward approach in asking the
+appraisal of different goods. To gain a better understanding of the
+valence of choices made, however, there is a demand for sophisticated
+tests which allow estimating the strength of the respective preferences.
+The number of commodities presented at the same time is, however,
+limited and in classical test settings, usually only two options are
+presented. Here, we evaluate the option of combining multiple binary
+choices to rank preferences among a larger number of commodities. In the
+case of continuous data, ties are introduced when the same amount of
+commodity (e.g. a fluid) was chosen. The tiefightR package creates a
+ranking system that takes into account the number of ties and
+intransitivities in the data. This will help the user to rank specific
+commodities and evaluate the quality of this ranking.
 
 ## Installation
 
@@ -21,16 +36,27 @@ You can install the development version from
 devtools::install_github("mytalbot/tiefightR")
 ```
 
-tiefightR uses the following packages as dependencies (in no particular
-order):  
-magrittr, tibble, dplyr, reshape2, prefmod, gnm, ggplot2, parallel,
-foreach, viridis, Rmisc
+… or download the source file for easy installation from within R (or
+RStudio) if you don’t have devtools available.
 
-# tidyverse\!\!\! Lazy loading
+**tiefightR** uses the following package as dependencies (in no
+particular order). Installing tiefightR will usually take care of this.
+However, sometimes single dependencies can cause problems and have to be
+installed manually.
+
+“magrittr”, “tibble”, “dplyr”, “reshape2”, “prefmod”, “gnm”, “ggplot2”,
+“ggpubr”, “foreach”, “viridis”, “Rmisc”
+
+The following function can be used to install single packages - or just
+the missing ones.
+
+``` {r
+install.packages("paste missing package name here ")
+```
 
 ## Example
 
-This is a basic example which shows you how to compare an item with any
+This is a basic example which shows how to compare an item with any
 combination of the remaining items.
 
 ``` r

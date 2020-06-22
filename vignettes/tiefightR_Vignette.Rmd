@@ -1,0 +1,151 @@
+---
+title: "tiefight R Vignette"
+author: "Steven R. Talbot"
+date: "`r Sys.Date()`"
+output: 
+    rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{saga_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## tiefighR for preference testing
+
+Preference tests are a valuable tool to measure the "wants" of individuals and have been proven to be a valid method in order to rate different commodities. The number of commodities presented at the same time is, however, limited and in classical test settings usually only two options are presented. In our paper we evaluate the option of combining multiple binary choices in order to rank preferences among a larger number of commodities. The tiefightR package offers the neccessary tools to test selections of commodities and to obtain an estimate of their relative position. 
+
+## General concept
+
+For data binarization a preference threshold for ties is needed (by default this is 50% for an equal commodity selection Likelihood). In case of ties, the binary response variable is randomized. Therefore, the analysis has to be repeated multiple times for getting more robust estimates of the tested commodities' position in the data. 
+
+Further, the tiefighteR package offers simulation capabilities. This will help to determine the position of individual items without having to test the whole data set. The simulation will randomly test an item against all remaining combinations. These calculations are combined with an estimate on the intransitivity which acts as a quality sign for the found position. The simulation results can give an indication for similar data and how new commodities can be positioned.
+
+## Data
+
+We conducted experiments with rhesus macaques, mice, and humans in order to validate the ranking method across species. These data sets are included in the package and are called `human`, `mouse` and `rhesus`. The response variable for human is binary and for rhesus and mouse it is continous (i.e., the amount of drank liquid). In order to harmonize the analysis, the continous data will have to be binarized. 
+
+The following example (mouse) shows how the raw (input) data need to be structured. The "pref_img1" is the binary response variable.
+
+```{r}
+head(tiefightR::mouse)
+```
+
+The column names in different data sets can be different. Therefore, the functions have fields that need specification. The following names should be adjusted when they are different (e.g. in the `tie_worth` function).
+
+```{r echo=TRUE}
+ SV        = "side"                     # name of the side variable (default = "side_img1")
+ RF        = "fluidType"                # name of the reference fluid variable (default = "img1")
+ CF        = "combinationWith"          # name of the combination fluid variable (default = "img2")
+ id        = "animalID"                 # subject IDs (default = "ID")
+ RV        = "numOF_visits_with_Licks"  # name of the response variable (default = "pref_img1")
+```
+
+
+## How many tests are required?
+
+The output of the `tie_worth` function are worth values that can be ranked for position. When ties are present (or introduced), the worth values will shift. The question is: when can a user be certain that a position is legit when ties are present? In order to stabilise the position in terms of worth values, we use the power of the central tendency shift of the mean. The more often a random test is repeated, the more stable the mean becomes. In order to generalize the different distances we calculate the (Euclidean) distance matrix of the worth values at each randomization step and report the average distance over the number of randomizations. It can be expected that the mean Euclidean distance and the corresponding variance stabilize.
+
+Consider the following worth plot for binary mouse data. The distance between two data points is simply the difference between worth values. In the distance matrix the distances for all combinations are calculated. 
+
+```{r echo=FALSE, fig.height=5, fig.width=5, fig.cap = "Concept of the Euclidean distance measurement between worth values.", out.width="60%"}
+
+library(tiefightR)
+raw        <- tiefightR::mouse
+set.seed(123)
+bin_mouse  <- tie_binarize(xdata      = tiefightR::mouse,
+                           SV         = "side",
+                           RF         = "fluidType",
+                           CF         = "combinationWith",
+                           id         = "animalID",
+                           RV         = "numOF_visits_with_Licks",
+                           compiled_studies	 = 1,
+                           setseed    = TRUE,
+                           prefLimit  = 50)
+
+mouse1      <- tie_worth(xdata         = bin_mouse,
+                        SV            = "side_img1",
+                        RF            = "img1",
+                        CF            = "img2",
+                        id            = "ID",
+                        RV            = "pref_img1",
+                        intrans       = FALSE,
+                        compstudy     = 1,
+                        default       = "HCl",
+                        ordn          = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"))
+
+plot(mouse1$modelout, ylim=c(0.1,0.26), ylab="worth value")
+arrows(1.25, 0.13, x1 = 1.25, y1 = 0.188, length = 0.15, angle = 90, code = 3, lwd=1.2)
+text(1.39, 0.16, "Distance")
+```
+
+Of course, this only works when ties are present! Otherwise, there would be nothing to randomize.
+
+```{r echo=FALSE, warning = FALSE, echo=FALSE, out.width="45%"}
+library(tiefightR)
+P <- tie_rwrap(dat        = tiefightR::mouse,
+               SV         = "side",
+               RF         = "fluidType",
+               CF         = "combinationWith",
+               id         = "animalID",
+               RV         = "numOF_visits_with_Licks",
+               ord        = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"),
+               default    = "HCl",
+               prefLimit  = 50,
+               setseed    = FALSE,
+               compstudy  = 1,
+               R          = 150)
+print(P$p1)    
+print(P$p2)  
+```
+
+The plots show that the overall change in Euclidean distances is small. The largest step occurs within the first 50 to 75 randomization steps. The corresponding SD of the distances corroborates this. Empirically, for these mouse data, at least 50 randomizations are required to obtain stable mean positions with the tested commodities.
+
+
+## Testing single commodities
+
+With this knowledge, individual items from the commodity list can be tested. The tie_test function was specifically designed to test individual combinations. For example, if the position of the  NaCl item is to be tested (e.g., at 50 randomizations), the user combines this with any other item combination from the list. As a further criterion (and sign of good quality), the intransitivity is computed as well. The user can add more items to the tested "against" list for getting more confidence in the positioning of the tested item (hopefully, with lower intransitivity).
+
+
+```{r echo=FALSE}
+library(tiefightR)
+raw        <- tiefightR::mouse
+set.seed(123)
+bin_mouse  <- tie_binarize(xdata      = tiefightR::mouse,
+                           SV         = "side",
+                           RF         = "fluidType",
+                           CF         = "combinationWith",
+                           id         = "animalID",
+                           RV         = "numOF_visits_with_Licks",
+                           compiled_studies	 = 1,
+                           setseed    = TRUE,
+                           prefLimit  = 50)
+
+mytest  <- tie_test(xdata      = bin_mouse,
+                    R          = 50,
+                    intrans    = TRUE,
+                    compstudy  = 1,
+                    default    = "HCl",
+                    ord        = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"),
+                    seed       = TRUE,
+                    testme     = "NaCl",               
+                    against    = "HCl") 
+
+mytest
+```
+
+
+NaCl is positioned on position 2 (which is the truth, with HCl in position 1). Adding more items can lower the intransitivity (but depends on the individual intransitivities in the data set).
+
+
+
+
+
+
+

@@ -6,12 +6,7 @@
 \usage{
 tie_test(
   xdata = NULL,
-  R = 2,
-  SV = NULL,
-  RF = NULL,
-  CF = NULL,
-  id = NULL,
-  RV = NULL,
+  R = NULL,
   intrans = TRUE,
   compstudy = NULL,
   default = NULL,
@@ -24,6 +19,14 @@ tie_test(
 \arguments{
 \item{xdata}{imported (binarized) data frame}
 
+\item{intrans}{calculate intransitivities (calculation intense!)}
+
+\item{compstudy}{label of the compiled sub study (used for filtering)}
+
+\item{default}{default item in worth value estimation (usually the lowest worth value)}
+
+\item{esti}{worth estimator (default, "worth", alt: "estimator")}
+
 \item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
@@ -33,14 +36,6 @@ tie_test(
 \item{id}{subject IDs}
 
 \item{RV}{name of the response variable}
-
-\item{intrans}{calculate intransitivities (calculation intense!)}
-
-\item{compstudy}{label of the compiled sub study (used for filtering)}
-
-\item{default}{default item in worth value estimation (usually the lowest worth value)}
-
-\item{esti}{worth estimator (default, "worth", alt: "estimator")}
 
 \item{r1}{label of the test item (e.g., "Lake")}
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Binarize continous data — tie_binarize • tiefightR</title>
+<title>Tie random wrapper for the rwalk function — tie_rwrap • tiefightR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Binarize continous data — tie_binarize" />
-<meta property="og:description" content="Uses tie_import output as input." />
+<meta property="og:title" content="Tie random wrapper for the rwalk function — tie_rwrap" />
+<meta property="og:description" content="The tie_rwrap is a wrapper function for tie_rwalk and uses a number of R randomization steps to calculate the mean
+Euclidean distance between worth values. The resulting curve will tell something about tie stability in the data and can
+be used for the definition of a randomization step cut-off value." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -123,39 +125,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Binarize continous data</h1>
+    <h1>Tie random wrapper for the rwalk function</h1>
     
-    <div class="hidden name"><code>tie_binarize.Rd</code></div>
+    <div class="hidden name"><code>tie_rwrap.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Uses <code>tie_import</code> output as input.</p>
+    <p>The <code>tie_rwrap</code> is a wrapper function for tie_rwalk and uses a number of R randomization steps to calculate the mean
+Euclidean distance between worth values. The resulting curve will tell something about tie stability in the data and can
+be used for the definition of a randomization step cut-off value.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tie_binarize</span>(
-  <span class='kw'>xdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>SV</span> <span class='kw'>=</span> <span class='st'>"side"</span>,
-  <span class='kw'>RF</span> <span class='kw'>=</span> <span class='st'>"fluidType"</span>,
-  <span class='kw'>CF</span> <span class='kw'>=</span> <span class='st'>"combinationWith"</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"animalID"</span>,
-  <span class='kw'>RV</span> <span class='kw'>=</span> <span class='st'>"numOF_visits_with_Licks"</span>,
-  <span class='kw'>datalabel</span> <span class='kw'>=</span> <span class='st'>"binarized"</span>,
-  <span class='kw'>compiled_studies</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>setseed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>tie_rwrap</span>(
+  <span class='kw'>dat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>SV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>RF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>CF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>RV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>prefLimit</span> <span class='kw'>=</span> <span class='fl'>50</span>,
-  <span class='kw'>sidevar</span> <span class='kw'>=</span> <span class='st'>"side"</span>,
-  <span class='kw'>refval</span> <span class='kw'>=</span> <span class='st'>"refValue"</span>,
-  <span class='kw'>oval</span> <span class='kw'>=</span> <span class='st'>"otherValue"</span>,
-  <span class='kw'>aid</span> <span class='kw'>=</span> <span class='st'>"animalID"</span>,
-  <span class='kw'>fldrnk</span> <span class='kw'>=</span> <span class='st'>"fluid_drunk"</span>
+  <span class='kw'>setseed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>compstudy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>2</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>xdata</th>
-      <td><p>imported (binarized) data frame</p></td>
+      <th>dat</th>
+      <td><p>imported raw data (should be binary, if not, will be binarized automatically)</p></td>
     </tr>
     <tr>
       <th>SV</th>
@@ -178,46 +179,34 @@
       <td><p>name of the response variable</p></td>
     </tr>
     <tr>
-      <th>datalabel</th>
-      <td><p>universal study label for the binarized data</p></td>
+      <th>ord</th>
+      <td><p>item category order</p></td>
     </tr>
     <tr>
-      <th>compiled_studies</th>
-      <td><p>label of the compiled sub study (used for filtering)</p></td>
-    </tr>
-    <tr>
-      <th>setseed</th>
-      <td><p>TRUE/FALSE for seeding</p></td>
+      <th>default</th>
+      <td><p>default item in worth value estimation (usually the lowest worth value)</p></td>
     </tr>
     <tr>
       <th>prefLimit</th>
       <td><p>preference limit for binarization threshold</p></td>
     </tr>
     <tr>
-      <th>sidevar</th>
-      <td><p>the name of the standardized side variable in the org data</p></td>
+      <th>setseed</th>
+      <td><p>TRUE/FALSE for seeding</p></td>
     </tr>
     <tr>
-      <th>refval</th>
-      <td><p>the name of the standardized reference variable in the org data</p></td>
+      <th>R</th>
+      <td><p>number of maximum randomization steps</p></td>
     </tr>
     <tr>
-      <th>oval</th>
-      <td><p>the name of the standardized combination variable in the org data</p></td>
-    </tr>
-    <tr>
-      <th>aid</th>
-      <td><p>the name of the standardized animal id column in the org data</p></td>
-    </tr>
-    <tr>
-      <th>fldrnk</th>
-      <td><p>the name of the standardizedresponse variable in the org data</p></td>
+      <th>showplotNo</th>
+      <td><p>shows plots: 1 = mean Euclidean distance over R and 2 = same, but SD</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tada</p>
+    <p>Exports random binarize response for distance cutoff selection</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

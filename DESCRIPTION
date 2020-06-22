@@ -25,10 +25,12 @@ Imports: magrittr,
     prefmod,
     gnm,
     ggplot2,
+    ggpubr,
     parallel,
     doParallel,
     foreach,
     viridis,
+    ggsci,
     Rmisc
 Depends: 
     R (>= 2.10)

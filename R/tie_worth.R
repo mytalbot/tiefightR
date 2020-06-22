@@ -209,9 +209,9 @@ tie_worth <- function(xdata     = NULL,
   }else{}
 
   if(intrans==F){
-    list(dat=dat, res=resNoSide, worth=worth)
+    list(dat=dat, res=resNoSide, modelout=hwor_DS1, worth=worth)
   }else{
-    list(dat=dat, res=resNoSide, worth=worth, intrans=itr)
+    list(dat=dat, res=resNoSide, modelout=hwor_DS1, worth=worth, intrans=itr)
   }
 
 }

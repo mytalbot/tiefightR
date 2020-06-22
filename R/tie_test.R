@@ -31,32 +31,23 @@
 #' @export
 
 
-tie_test <- function(xdata     = NULL,
-                     R         = 2,
-                     SV        = NULL,
-                     RF        = NULL,
-                     CF        = NULL,
-                     id        = NULL,
-                     RV        = NULL,
-                     intrans   = TRUE,
-                     compstudy = NULL,
-                     default   = NULL,
-                     ord       = NULL,
-                     seed      = TRUE,
-                     testme    = NULL,
-                     against   = NULL){
+tie_test <- function(xdata      = NULL,
+                     R          = NULL,
+                     intrans    = TRUE,
+                     compstudy  = NULL,
+                     default    = NULL,
+                     ord        = NULL,
+                     seed       = TRUE,
+                     testme     = NULL,
+                     against    = NULL){
 
   if(seed==TRUE){
     set.seed(123)
   }else{}
 
+  run        <- NULL
   run        <- (replicate(R,
                            ran <-  tie_worth(xdata     = xdata,
-                                             SV        = SV,
-                                             RF        = RF,
-                                             CF        = CF,
-                                             id        = id,
-                                             RV        = RV,
                                              showplot  = FALSE,
                                              intrans   = intrans,
                                              compstudy = compstudy,
@@ -66,22 +57,25 @@ tie_test <- function(xdata     = NULL,
                                              r2        = against) ))
 
   # if the intransitivity is checked, conditional outcomes!
+  intrcol    <- which(rownames(run)=="intrans")
+  worthcol   <- which(rownames(run)=="worth")
+
   if(intrans==TRUE){
-    ran      <- as.data.frame(run[3,])
-    I        <- as.numeric(run[4,])
+    ran      <- as.data.frame(run[worthcol,])
+    I        <- as.numeric(run[intrcol,])
   }else{
-    ran      <- as.data.frame(run[3,])
+    ran      <- as.data.frame(run[worthcol,])
   }
 
   W          <- rowMeans(ran)
   W          <- W[order(W)  ]
   res        <- data.frame(against = paste(against,collapse = ","),
                            worth   = round(W,3),
-                           pos     = 1:7,
-                           intrans = mean(I),
-                           I_sd    = sd(I),
-                           upr     = Rmisc::CI(I)[1],
-                           lwr     = Rmisc::CI(I)[3])
+                           pos     = 1:length(W),
+                           intrans = round(mean(I),2),
+                           I_sd    = round(sd(I),2),
+                           upr     = round(Rmisc::CI(I)[1],2),
+                           lwr     = round(Rmisc::CI(I)[3],2))
 
   zeigsmir   <- res[rownames(res)==testme, ]
   return(zeigsmir)

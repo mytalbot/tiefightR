@@ -83,16 +83,22 @@ tie_sim <- function(xdata     = NULL,
 
                       # include intransitivity calculations or skip for faster performance?
                       if(intrans==TRUE){
-                        data.frame(worth    = rowMeans(as.data.frame(h[3,])) [order(rowMeans(as.data.frame(h[3,])))],
-                                   picture  = names(rowMeans(as.data.frame(h[3,])) [order(rowMeans(as.data.frame(h[3,])))]),
+
+                        intrcol    <- which(rownames(h)=="intrans")
+                        worthcol   <- which(rownames(h)=="worth")
+
+                        data.frame(worth    = rowMeans(as.data.frame(h[worthcol,])) [order(rowMeans(as.data.frame(h[worthcol,])))],
+                                   picture  = names(rowMeans(as.data.frame(h[worthcol,])) [order(rowMeans(as.data.frame(h[worthcol,])))]),
                                    pos      = 1:length(ord),
-                                   intrans  = mean(as.numeric(h[4,])),
+                                   intrans  = mean(as.numeric(h[intrcol,])),
                                    combinr  = j,
                                    noVars   = length(v2),
                                    r2       = paste(v2,collapse = ","))
                       }else{
-                        data.frame(worth    = rowMeans(as.data.frame(h[3,])) [order(rowMeans(as.data.frame(h[3,])))],
-                                   picture  = names(rowMeans(as.data.frame(h[3,])) [order(rowMeans(as.data.frame(h[3,])))]),
+                        worthcol   <- which(rownames(h)=="worth")
+
+                        data.frame(worth    = rowMeans(as.data.frame(h[worthcol,])) [order(rowMeans(as.data.frame(h[worthcol,])))],
+                                   picture  = names(rowMeans(as.data.frame(h[worthcol,])) [order(rowMeans(as.data.frame(h[worthcol,])))]),
                                    pos      = 1:length(ord),
                                    combinr  = j,
                                    noVars   = length(v2),

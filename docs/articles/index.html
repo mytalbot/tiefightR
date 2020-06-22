@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Binarize continous data — tie_binarize • tiefightR</title>
+<title>Articles • tiefightR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,7 @@
 
 
 
-<meta property="og:title" content="Binarize continous data — tie_binarize" />
-<meta property="og:description" content="Uses tie_import output as input." />
+<meta property="og:title" content="Articles" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -67,7 +66,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -123,107 +122,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Binarize continous data</h1>
-    
-    <div class="hidden name"><code>tie_binarize.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Uses <code>tie_import</code> output as input.</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <dl>
+        <dt><a href="tiefightR_Vignette.html">tiefight R Vignette</a></dt>
+        <dd></dt>
+      </dl>
     </div>
-
-    <pre class="usage"><span class='fu'>tie_binarize</span>(
-  <span class='kw'>xdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>SV</span> <span class='kw'>=</span> <span class='st'>"side"</span>,
-  <span class='kw'>RF</span> <span class='kw'>=</span> <span class='st'>"fluidType"</span>,
-  <span class='kw'>CF</span> <span class='kw'>=</span> <span class='st'>"combinationWith"</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"animalID"</span>,
-  <span class='kw'>RV</span> <span class='kw'>=</span> <span class='st'>"numOF_visits_with_Licks"</span>,
-  <span class='kw'>datalabel</span> <span class='kw'>=</span> <span class='st'>"binarized"</span>,
-  <span class='kw'>compiled_studies</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>setseed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>prefLimit</span> <span class='kw'>=</span> <span class='fl'>50</span>,
-  <span class='kw'>sidevar</span> <span class='kw'>=</span> <span class='st'>"side"</span>,
-  <span class='kw'>refval</span> <span class='kw'>=</span> <span class='st'>"refValue"</span>,
-  <span class='kw'>oval</span> <span class='kw'>=</span> <span class='st'>"otherValue"</span>,
-  <span class='kw'>aid</span> <span class='kw'>=</span> <span class='st'>"animalID"</span>,
-  <span class='kw'>fldrnk</span> <span class='kw'>=</span> <span class='st'>"fluid_drunk"</span>
-)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>xdata</th>
-      <td><p>imported (binarized) data frame</p></td>
-    </tr>
-    <tr>
-      <th>SV</th>
-      <td><p>name of the side variable</p></td>
-    </tr>
-    <tr>
-      <th>RF</th>
-      <td><p>name of the reference fluid variable</p></td>
-    </tr>
-    <tr>
-      <th>CF</th>
-      <td><p>name of the combination fluid variable</p></td>
-    </tr>
-    <tr>
-      <th>id</th>
-      <td><p>subject IDs</p></td>
-    </tr>
-    <tr>
-      <th>RV</th>
-      <td><p>name of the response variable</p></td>
-    </tr>
-    <tr>
-      <th>datalabel</th>
-      <td><p>universal study label for the binarized data</p></td>
-    </tr>
-    <tr>
-      <th>compiled_studies</th>
-      <td><p>label of the compiled sub study (used for filtering)</p></td>
-    </tr>
-    <tr>
-      <th>setseed</th>
-      <td><p>TRUE/FALSE for seeding</p></td>
-    </tr>
-    <tr>
-      <th>prefLimit</th>
-      <td><p>preference limit for binarization threshold</p></td>
-    </tr>
-    <tr>
-      <th>sidevar</th>
-      <td><p>the name of the standardized side variable in the org data</p></td>
-    </tr>
-    <tr>
-      <th>refval</th>
-      <td><p>the name of the standardized reference variable in the org data</p></td>
-    </tr>
-    <tr>
-      <th>oval</th>
-      <td><p>the name of the standardized combination variable in the org data</p></td>
-    </tr>
-    <tr>
-      <th>aid</th>
-      <td><p>the name of the standardized animal id column in the org data</p></td>
-    </tr>
-    <tr>
-      <th>fldrnk</th>
-      <td><p>the name of the standardizedresponse variable in the org data</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>tada</p>
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
   </div>
 </div>
 

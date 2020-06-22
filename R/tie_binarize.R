@@ -18,7 +18,7 @@
 #' @param oval the name of the standardized combination variable in the org data
 #' @param aid  the name of the standardized animal id column in the org data
 #' @param fldrnk the name of the standardizedresponse variable in the org data
-
+#'
 #' @import dplyr
 #' @importFrom stats runif
 #' @importFrom magrittr "%>%"
