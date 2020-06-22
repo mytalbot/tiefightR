@@ -3,20 +3,14 @@
 #' The \code{tie_test} function can be used for individual item testing.
 #'
 #' @param xdata imported (binarized) data frame
-#' @param esti worth estimator (default, "worth", alt: "estimator")
-#' @param SV name of the side variable
-#' @param RF name of the reference fluid variable
-#' @param CF name of the combination fluid variable
-#' @param id subject IDs
-#' @param RV name of the response variable
 #' @param intrans calculate intransitivities (calculation intense!)
-#' @param r1 label of the test item (e.g., "Lake")
-#' @param r2 label(s) of the remaining item(s)
 #' @param compstudy label of the compiled sub study (used for filtering)
-#' @param showplot show worth plot TRUE/FALSE
-#' @param ymax maximum y-scale of the worth plot
-#' @param ordn item category order
 #' @param default default item in worth value estimation (usually the lowest worth value)
+#' @param R number of randomizations
+#' @param ord item category order
+#' @param seed BOOLEAN; set a random seed TRUE/FALSE?
+#' @param testme test this variable against...
+#' @param against any other single variable from the commodity list (or combinations); vectorize if necessary c("item1","item2")
 #'
 #' @importFrom reshape2 dcast
 #' @importFrom stats as.formula poisson
@@ -29,7 +23,6 @@
 #' @return A frequency table for item positions during the simulation; Tukey's HSD Test for positions; Position Bubble Plot
 #'
 #' @export
-
 
 tie_test <- function(xdata      = NULL,
                      R          = NULL,

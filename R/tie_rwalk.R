@@ -2,15 +2,18 @@
 #'
 #' The \code{tie_rwalk} function prepares binary and continuous data form import into the tiefightR analysis.
 #'
-#' @param xdata imported (binarized) data frame
+#' @param dat imported (binarized) data frame
 #' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
 #' @param RV name of the response variable
+#' @param prefLimit preference limit for binarization threshold
 #' @param compstudy label of the compiled sub study (used for filtering)
 #' @param ord item category order
 #' @param default default item in worth value estimation (usually the lowest worth value)
+#' @param setseed BOOLEAN; set a random seed TRUE/FALSE?
+#' @param R number of randomizations
 #'
 #' @import ggplot2
 #' @import ggpubr

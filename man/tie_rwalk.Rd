@@ -20,6 +20,8 @@ tie_rwalk(
 )
 }
 \arguments{
+\item{dat}{imported (binarized) data frame}
+
 \item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
@@ -32,11 +34,15 @@ tie_rwalk(
 
 \item{ord}{item category order}
 
+\item{prefLimit}{preference limit for binarization threshold}
+
+\item{setseed}{BOOLEAN; set a random seed TRUE/FALSE?}
+
 \item{compstudy}{label of the compiled sub study (used for filtering)}
 
 \item{default}{default item in worth value estimation (usually the lowest worth value)}
 
-\item{xdata}{imported (binarized) data frame}
+\item{R}{number of randomizations}
 }
 \value{
 Exports random binarize response for distance cutoff selection

@@ -43,11 +43,9 @@ tie_sim(
 
 \item{cpus}{No. of used local CPUs for parallel computing (you should have more than 2)}
 
+\item{ord}{item category order}
+
 \item{v1}{testing variable (can be one item from the item list)}
-
-\item{esti}{worth estimator (default, "worth", alt: "estimator")}
-
-\item{ordn}{item category order}
 }
 \value{
 data.frame with the simulation results

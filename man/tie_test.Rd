@@ -19,33 +19,21 @@ tie_test(
 \arguments{
 \item{xdata}{imported (binarized) data frame}
 
+\item{R}{number of randomizations}
+
 \item{intrans}{calculate intransitivities (calculation intense!)}
 
 \item{compstudy}{label of the compiled sub study (used for filtering)}
 
 \item{default}{default item in worth value estimation (usually the lowest worth value)}
 
-\item{esti}{worth estimator (default, "worth", alt: "estimator")}
+\item{ord}{item category order}
 
-\item{SV}{name of the side variable}
+\item{seed}{BOOLEAN; set a random seed TRUE/FALSE?}
 
-\item{RF}{name of the reference fluid variable}
+\item{testme}{test this variable against...}
 
-\item{CF}{name of the combination fluid variable}
-
-\item{id}{subject IDs}
-
-\item{RV}{name of the response variable}
-
-\item{r1}{label of the test item (e.g., "Lake")}
-
-\item{r2}{label(s) of the remaining item(s)}
-
-\item{showplot}{show worth plot TRUE/FALSE}
-
-\item{ymax}{maximum y-scale of the worth plot}
-
-\item{ordn}{item category order}
+\item{against}{any other single variable from the commodity list (or combinations); vectorize if necessary c("item1","item2")}
 }
 \value{
 A frequency table for item positions during the simulation; Tukey's HSD Test for positions; Position Bubble Plot

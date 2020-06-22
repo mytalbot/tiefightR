@@ -4,10 +4,24 @@
 \alias{tie_intrans}
 \title{Calculate Intransitivity}
 \usage{
-tie_intrans(mydata = NULL)
+tie_intrans(
+  mydata = NULL,
+  idcolumn = "ID",
+  I1 = "img1",
+  I2 = "img2",
+  response = "pref_img1"
+)
 }
 \arguments{
 \item{mydata}{input data frame}
+
+\item{idcolumn}{name of the ID column in the input data}
+
+\item{I1}{name of the test image column in the input data}
+
+\item{I2}{name of the other (tested) items column in the input data}
+
+\item{response}{name of the response variable}
 }
 \value{
 intranscount intransitivity counts

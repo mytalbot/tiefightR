@@ -13,13 +13,14 @@
 #' @param RV name of the response variable
 #' @param setseed TRUE/FALSE for seeding
 #' @param prefLimit preference limit for binarization threshold
-#' @param showplotNo shows plots: 1 = mean Euclidean distance over R and 2 = same, but SD
 #' @param ord item category order
 #' @param default default item in worth value estimation (usually the lowest worth value)
+#' @param compstudy label of the compiled sub study (used for filtering)
 #'
 #' @import ggplot2
 #' @import ggpubr
 #' @import ggsci
+#' @importFrom stats sd dist
 #'
 #' @return Exports random binarize response for distance cutoff selection
 #'

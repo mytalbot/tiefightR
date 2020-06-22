@@ -6,6 +6,13 @@
 \usage{
 tie_simrep(res = NULL, v1 = NULL, path = NULL)
 }
+\arguments{
+\item{res}{result or output from the simulation}
+
+\item{v1}{test variable}
+
+\item{path}{path to where the report shall be stored (inluding plots)}
+}
 \value{
 A frequency table for item positions during the simulation; Tukey's HSD Test for positions; Position Bubble Plot
 }

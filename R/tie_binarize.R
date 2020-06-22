@@ -12,7 +12,6 @@
 #' @param setseed TRUE/FALSE for seeding
 #' @param prefLimit preference limit for binarization threshold
 #' @param datalabel universal study label for the binarized data
-#'
 #' @param sidevar the name of the standardized side variable in the org data
 #' @param refval the name of the standardized reference variable in the org data
 #' @param oval the name of the standardized combination variable in the org data

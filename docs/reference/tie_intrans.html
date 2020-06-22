@@ -137,7 +137,13 @@
     <p>The <code>tie_intrans</code> function loads the raw data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tie_intrans</span>(<span class='kw'>mydata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>tie_intrans</span>(
+  <span class='kw'>mydata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>idcolumn</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
+  <span class='kw'>I1</span> <span class='kw'>=</span> <span class='st'>"img1"</span>,
+  <span class='kw'>I2</span> <span class='kw'>=</span> <span class='st'>"img2"</span>,
+  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"pref_img1"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,6 +151,22 @@
     <tr>
       <th>mydata</th>
       <td><p>input data frame</p></td>
+    </tr>
+    <tr>
+      <th>idcolumn</th>
+      <td><p>name of the ID column in the input data</p></td>
+    </tr>
+    <tr>
+      <th>I1</th>
+      <td><p>name of the test image column in the input data</p></td>
+    </tr>
+    <tr>
+      <th>I2</th>
+      <td><p>name of the other (tested) items column in the input data</p></td>
+    </tr>
+    <tr>
+      <th>response</th>
+      <td><p>name of the response variable</p></td>
     </tr>
     </table>
 

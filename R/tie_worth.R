@@ -15,6 +15,7 @@
 #' @param compstudy label of the compiled sub study (used for filtering)
 #' @param showplot show worth plot TRUE/FALSE
 #' @param ymax maximum y-scale of the worth plot
+#' @param ymin minimum y-scale of the worth plot
 #' @param ordn item category order
 #' @param default default item in worth value estimation (usually the lowest worth value)
 #'
@@ -59,11 +60,10 @@ tie_worth <- function(xdata     = NULL,
     raus       <- r1
     # modify data
     mod        <- dat
-    mod        <- mod[!(mod$img1 %in% raus),]
-    mod        <- mod[!(mod$img2 %in% raus),]
+    mod        <- mod[!(mod[[RF]] %in% raus),] #mod[!(mod$img1 %in% raus),]
+    mod        <- mod[!(mod[[CF]] %in% raus),] #mod[!(mod$img2 %in% raus),]
     #sum(mod$img1==raus)
     #sum(mod$img2==raus)
-
 
     ### Packe eine Kombination des entfernten Pictures wieder rein & randomize the rest
     # of the combinations with that entfernte picture
@@ -77,8 +77,8 @@ tie_worth <- function(xdata     = NULL,
     ### Add the removed picture & a combination plus randomize the remainers
     S <- NULL
     for(i in 1:length(r2)){
-      s1 <- subset(dat, (img1==r1    & img2==r2[i]))
-      s2 <- subset(dat, (img1==r2[i] & img2==r1))
+      s1 <- subset(dat, (dat[names(dat)==RF]==r1    & dat[names(dat)==CF]==r2[i])) # subset(dat, (img1==r1    & img2==r2[i]))
+      s2 <- subset(dat, (dat[names(dat)==RF]==r2[i] & dat[names(dat)==CF]==r1))    # subset(dat, (img1==r2[i] & img2==r1))
       s  <- rbind(s1,s2)
       S  <- rbind(S,s)
     }
@@ -87,13 +87,13 @@ tie_worth <- function(xdata     = NULL,
     X     <- S
 
     # these get randomized
-    i1    <- dat[dat$img1 %in% raus & !(dat$img2 %in% add),]
-    i2    <- dat[dat$img2 %in% raus & !(dat$img1 %in% add),]
+    i1    <- dat[dat[[RF]] %in% raus & !(dat[[CF]] %in% add),]
+    i2    <- dat[dat[[CF]] %in% raus & !(dat[[RF]] %in% add),]
     inter <- rbind(i1,i2)
 
-    inter[, "pref_img1" ] <- sample(c(0,1),
-                                    replace = TRUE,
-                                    size    = dim(inter)[1])
+    inter[, RV] <- sample(c(0,1),
+                          replace = TRUE,
+                          size    = dim(inter)[1])
 
     xdata <- rbind(mod,X,inter)
   }else{

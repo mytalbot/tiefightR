@@ -3,6 +3,10 @@
 #' The \code{tie_intrans} function loads the raw data
 #'
 #' @param mydata input data frame
+#' @param idcolumn name of the ID column in the input data
+#' @param I1 name of the test image column in the input data
+#' @param I2 name of the other (tested) items column in the input data
+#' @param response name of the response variable
 #'
 #' @return intranscount intransitivity counts
 #'
@@ -10,14 +14,21 @@
 #'
 
 
-tie_intrans <- function(mydata=NULL){
+tie_intrans <- function(mydata=NULL, idcolumn="ID", I1="img1", I2="img2", response="pref_img1"){
+
+  # make global settings local
+  vIMG1       <- which(names(mydata)==I1)
+  vIMG2       <- which(names(mydata)==I2)
 
   # prepare data
-  mydata$img1 <- as.character(mydata$img1 )
-  mydata$img2 <- as.character(mydata$img2 )
+  mydata$img1 <- as.character(mydata[,vIMG1])
+  mydata$img2 <- as.character(mydata[,vIMG2])
 
-  uIDs   = unique( mydata[,3])
-  uItems = unique( c(mydata[,4], mydata[,5]) )
+  resVar      <- which(names(mydata)==response)
+  intIDcol    <- which(names(mydata)==idcolumn)
+
+  uIDs   = unique( mydata[,intIDcol])
+  uItems = unique( c(mydata[,vIMG1], mydata[,vIMG2]) )
   count  = 0
 
   #length(uIDs)
@@ -32,7 +43,7 @@ tie_intrans <- function(mydata=NULL){
 
   for(thisID in uIDs)
   {
-    thisData   = subset(mydata, ID==thisID)
+    thisData   = subset(mydata, mydata[names(mydata)==idcolumn]==thisID)
     lenDataset = length(thisData[[1]])
 
     for(i1 in 1:(length(uItems)-2))
@@ -48,14 +59,14 @@ tie_intrans <- function(mydata=NULL){
           for(count in 1:lenDataset)
           {
             #find i1 vs i2
-            if(thisData[count,4]==firstI & thisData[count, 5]==secondI) if(thisData[count,7]==1) AoverB=1 else AoverB=0 # A>B
-            if(thisData[count,4]==secondI & thisData[count,5]==firstI) if(thisData[count, 7]==0) AoverB=1 else AoverB=0 # A>B
+            if(thisData[count,vIMG1]==firstI & thisData[count, vIMG2]==secondI) if(thisData[count,resVar]==1) AoverB=1 else AoverB=0 # A>B
+            if(thisData[count,vIMG1]==secondI & thisData[count,vIMG2]==firstI) if(thisData[count, resVar]==0) AoverB=1 else AoverB=0 # A>B
             #find i2 vs i3
-            if(thisData[count,4]==secondI & thisData[count,5]==thirdI) if(thisData[count, 7]==1) BoverC=1 else BoverC=0 # A>B
-            if(thisData[count,4]==thirdI & thisData[count, 5]==secondI) if(thisData[count,7]==0) BoverC=1 else BoverC=0 # A>B
+            if(thisData[count,vIMG1]==secondI & thisData[count,vIMG2]==thirdI) if(thisData[count, resVar]==1) BoverC=1 else BoverC=0 # A>B
+            if(thisData[count,vIMG1]==thirdI & thisData[count, vIMG2]==secondI) if(thisData[count,resVar]==0) BoverC=1 else BoverC=0 # A>B
             #find i3 vs i1
-            if(thisData[count,4]==thirdI & thisData[count, 5]==firstI) if(thisData[count, 7]==1) CoverA=1 else CoverA=0 # A>B
-            if(thisData[count,4]==firstI & thisData[count, 5]==thirdI) if(thisData[count, 7]==0) CoverA=1 else CoverA=0 # A>B
+            if(thisData[count,vIMG1]==thirdI & thisData[count, vIMG2]==firstI) if(thisData[count, resVar]==1) CoverA=1 else CoverA=0 # A>B
+            if(thisData[count,vIMG1]==firstI & thisData[count, vIMG2]==thirdI) if(thisData[count, resVar]==0) CoverA=1 else CoverA=0 # A>B
           }
           #Invalid cases (A>B)&(B>C)&(C>A) OR (B>A)&(C>B)&(A>C)
           if(AoverB & BoverC & CoverA)
@@ -73,6 +84,7 @@ tie_intrans <- function(mydata=NULL){
       }
     }
   }
-  # print(paste(intranscount, "intransitive triplets from ", tripletcount, "total triplets"))
-  return(intranscount)
-}
+    # print(paste(intranscount, "intransitive triplets from ", tripletcount, "total triplets"))
+    return(intranscount)
+  }
+

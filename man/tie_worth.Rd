@@ -52,6 +52,8 @@ tie_worth(
 
 \item{r2}{label(s) of the remaining item(s)}
 
+\item{ymin}{minimum y-scale of the worth plot}
+
 \item{ymax}{maximum y-scale of the worth plot}
 }
 \value{

@@ -40,9 +40,9 @@ tie_rwrap(
 
 \item{setseed}{TRUE/FALSE for seeding}
 
-\item{R}{number of maximum randomization steps}
+\item{compstudy}{label of the compiled sub study (used for filtering)}
 
-\item{showplotNo}{shows plots: 1 = mean Euclidean distance over R and 2 = same, but SD}
+\item{R}{number of maximum randomization steps}
 }
 \value{
 Exports random binarize response for distance cutoff selection

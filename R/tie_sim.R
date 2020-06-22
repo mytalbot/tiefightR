@@ -6,7 +6,6 @@
 #' good fit for the item.
 #'
 #' @param xdata imported (binarized) data frame
-#' @param esti worth estimator (default, "worth", alt: "estimator")
 #' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
@@ -15,13 +14,13 @@
 #' @param intrans calculate intransitivities (calculation intense!)
 #' @param compstudy label of the compiled sub study (used for filtering)
 #' @param default default item in worth value estimation (usually the lowest worth value)
-#' @param ordn item category order
+#' @param ord item category order
 #' @param cpus No. of used local CPUs for parallel computing (you should have more than 2)
 #' @param v1 testing variable (can be one item from the item list)
 #' @param R No. of randomization steps
 #'
 #' @import magrittr
-#' @import tidyverse
+#' @import dplyr
 #' @import reshape2
 #' @import prefmod
 #' @import gnm

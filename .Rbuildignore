@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^test_script\.R$
+^test_distances\.R$
+^docs$
+^pkgdown$
