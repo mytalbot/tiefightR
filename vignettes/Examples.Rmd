@@ -103,7 +103,7 @@ mouse1$worth
 mouse1$intrans
 ```
 
-## Use case 3: Individual test szenario (human data)
+## Use case 4: Individual test scenario (human data)
 
 Although the function from the prior use cases allow individual testing, the tiefightR package offers a distinct function for testing variable combinations. The resulting table yields the mean intransitivity value plus the 95% confidence interval. This function can be used to test a data set for the number of randomizations needed to adjust for potential ties.
 
@@ -124,7 +124,7 @@ mytest  <- tie_test(xdata     = raw,
 mytest
 ```
 
-## Use case 4: Simulation (human data)
+## Use case 5: Simulation (human data)
 
 The above shown use cases are good for single tests when the combination of items is evident. However, in reality the order of items is unclear. Simulation is a good start for ranking an item without knowing too much about the remaining combinations and transitivies. The `tie_sim` function will test an item against all possible combinations (as shown above) but will, additionally, randomize the results R-times. The resulting mean worth values and mean intransitivity values indicate the quality of the item's position.
 

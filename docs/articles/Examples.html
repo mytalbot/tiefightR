@@ -152,13 +152,13 @@
                      <span class="kw">r2</span>        <span class="kw">=</span> <span class="st">"Cat"</span>)  <span class="co"># change this / to multiple combis</span>
 <span class="no">human_test2</span>$<span class="no">worth</span>
 <span class="co">#&gt;                 worth</span>
-<span class="co">#&gt; Cat        0.31961874</span>
-<span class="co">#&gt; Crow       0.20469942</span>
-<span class="co">#&gt; Doctor     0.09159964</span>
-<span class="co">#&gt; Frustrated 0.05318099</span>
-<span class="co">#&gt; Lake       0.11776870</span>
-<span class="co">#&gt; War        0.03691583</span>
-<span class="co">#&gt; Fire       0.17621667</span>
+<span class="co">#&gt; Cat        0.32006010</span>
+<span class="co">#&gt; Crow       0.23339325</span>
+<span class="co">#&gt; Doctor     0.08545212</span>
+<span class="co">#&gt; Frustrated 0.05565854</span>
+<span class="co">#&gt; Lake       0.10552280</span>
+<span class="co">#&gt; War        0.04199299</span>
+<span class="co">#&gt; Fire       0.15792020</span>
 <span class="co">#&gt; attr(,"class")</span>
 <span class="co">#&gt; [1] "wmat"   "matrix"</span></pre></body></html></div>
 </div>
@@ -212,9 +212,9 @@
 <span class="co">#&gt; [1] 35</span></pre></body></html></div>
 </div>
 </div>
-<div id="use-case-3-individual-test-szenario-human-data" class="section level2">
+<div id="use-case-4-individual-test-scenario-human-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use-case-3-individual-test-szenario-human-data" class="anchor"></a>Use case 3: Individual test szenario (human data)</h2>
+<a href="#use-case-4-individual-test-scenario-human-data" class="anchor"></a>Use case 4: Individual test scenario (human data)</h2>
 <p>Although the function from the prior use cases allow individual testing, the tiefightR package offers a distinct function for testing variable combinations. The resulting table yields the mean intransitivity value plus the 95% confidence interval. This function can be used to test a data set for the number of randomizations needed to adjust for potential ties.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Observe the position and mean intransitivity after R randomizations</span>
 <span class="no">raw</span>     <span class="kw">&lt;-</span> <span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/human.html">human</a></span>
@@ -233,9 +233,9 @@
 <span class="co">#&gt;      against worth pos intrans I_sd upr lwr</span>
 <span class="co">#&gt; Lake     Cat 0.129   5      65    0  65  65</span></pre></body></html></div>
 </div>
-<div id="use-case-4-simulation-human-data" class="section level2">
+<div id="use-case-5-simulation-human-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use-case-4-simulation-human-data" class="anchor"></a>Use case 4: Simulation (human data)</h2>
+<a href="#use-case-5-simulation-human-data" class="anchor"></a>Use case 5: Simulation (human data)</h2>
 <p>The above shown use cases are good for single tests when the combination of items is evident. However, in reality the order of items is unclear. Simulation is a good start for ranking an item without knowing too much about the remaining combinations and transitivies. The <code>tie_sim</code> function will test an item against all possible combinations (as shown above) but will, additionally, randomize the results R-times. The resulting mean worth values and mean intransitivity values indicate the quality of the item’s position.</p>
 <p>Standard R will only work on a single thread. Since simulations are computationally intense, the <code>tie_sim</code> function employs parallel computation. You should only perform these calculations if you’re working on a machine with multipe cores (CPUs). The following function will help you determine the number of cores on your machine.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co">### Check the number of available CPU cores on your machine.</span>
@@ -272,8 +272,8 @@
 <span class="fu"><a href="../reference/tie_simrep.html">tie_simrep</a></span>(<span class="kw">res</span>  <span class="kw">=</span> <span class="no">sim_humans</span>, <span class="kw">v1</span>   <span class="kw">=</span> <span class="no">testme</span>)</pre></body></html></div>
 <p><img src="Examples_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
 <pre><code>#&gt; 
-#&gt;  5  6  7 
-#&gt; 20 36  7</code></pre>
+#&gt;  4  5  6  7 
+#&gt;  1 21 36  5</code></pre>
 </div>
   </div>
 
