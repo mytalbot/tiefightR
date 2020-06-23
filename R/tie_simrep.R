@@ -1,6 +1,7 @@
 #' Simulation report
 #'
-#' The \code{tie_simrep} function prepares some tables and plots for analysing the simulation output.
+#' The \code{tie_simrep} function prepares a frequency table and plots for analysing the simulation output. Can also be used
+#' for saving the output to file when a path is provided.
 #'
 #' @param res result or output from the simulation
 #' @param v1 test variable

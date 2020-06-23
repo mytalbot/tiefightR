@@ -47,7 +47,10 @@
 
 
 <meta property="og:title" content="Import Function — tie_import" />
-<meta property="og:description" content="The tie_import function loads the raw data" />
+<meta property="og:description" content="The tie_import function loads the raw data as a data frame. This function can be skipped when one of the three internal
+data sets (human, mouse, rhesus) are used. For a user who wants to import own data this function is a good start. Make sure that
+the imported data has at least the following information: data, subset (even if none is there), SV (side variable, left/right),
+RF (reference fluid/item), CF (combination fluid), id (animal id), RV (response variable))." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -137,7 +140,10 @@
     </div>
 
     <div class="ref-description">
-    <p>The <code>tie_import</code> function loads the raw data</p>
+    <p>The <code>tie_import</code> function loads the raw data as a data frame. This function can be skipped when one of the three internal
+data sets (human, mouse, rhesus) are used. For a user who wants to import own data this function is a good start. Make sure that
+the imported data has at least the following information: data, subset (even if none is there), SV (side variable, left/right),
+RF (reference fluid/item), CF (combination fluid), id (animal id), RV (response variable)).</p>
     </div>
 
     <pre class="usage"><span class='fu'>tie_import</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>valenceset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>

@@ -1,6 +1,6 @@
 #' Tie random walk function
 #'
-#' The \code{tie_rwalk} function prepares binary and continuous data form import into the tiefightR analysis.
+#' The \code{tie_rwalk} function prepares binary and continuous data for tiefightR analysis.
 #'
 #' @param dat imported (binarized) data frame
 #' @param SV name of the side variable

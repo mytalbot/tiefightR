@@ -60,5 +60,7 @@ tie_worth(
 Exports the results of the worth value calculation, including the GNM analysis.
 }
 \description{
-The \code{tie_import} function prepares binary and continuous data form import into the tiefightR analysis.
+The \code{tie_import} function prepares binary and continuous data form import into the tiefightR analysis. The user has
+to specicy the names of the input columns (if they deviate from the default values in the function argument list). The function
+randomizes the response variable for any non chosen item test combination and reports the worth values.
 }

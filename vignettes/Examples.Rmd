@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 The response variable (RV) is binary. The items in the commodity list are ("Cat", "Crow", "Doctor", "Frustrated", "Lake", "War", "Fire"). For this purpose, the subset "LargeValanceRange" was chosen to calculate the worth plot of the items as well as the total intransitivity value of the data set (always between pairs of three).
 
-```{r, fig.height=4, fig.width=4, fig.cap = "Worth plot."}
+```{r, fig.height=4, fig.width=4}
 library(tiefightR)
 raw       <- tiefightR::human
 humantest <- tie_worth(xdata   = raw,
@@ -49,7 +49,7 @@ humantest$intrans
 
 Let's say we want to test the position of "Lake". Then we'll have to add the varialbe r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example we test against r2="Cat". This vector can be expanded with any item from the full list. The `tie_worth` function will take any combination of "Lake" vs "Cat" and **randomizes** the outcome variable (pref_img1) for the remaining combinations. This way the position of "Lake" will tested agains random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get "fair" estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depend on the data set. However, in the "tiefightR Vignette" a minimum of 50 radnomizations seems reasonable for the mouse data. You'll notice, that the worth values are different compared to use case 1. The function arguments (SV...RV) are the default settings and have not to be repeated here again. 
 
-```{r, fig.height=4, fig.width=4, fig.cap = "Worth plot."}
+```{r, fig.height=4, fig.width=4}
 
 human_test2 <- tie_worth(xdata = raw,
                      showplot  = FALSE,
@@ -66,7 +66,7 @@ human_test2$worth
 
 The problem of position evaluation become more difficult when data are non-binary. This will automatically introduce ties for items with the same continous outcome. In order to work with these data, they'll have to be binarized (`tie_binarize`)first and then analysed with the `tie_worth` function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument comstudy has changed as well since in these data, the names for the subgroups are different. The variables (SV, RF, CF, id and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the "original" data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continous) ties beeing 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%. 
 
-```{r, fig.height=4, fig.width=4, fig.cap = "Worth plot."}
+```{r, fig.height=4, fig.width=4}
 # Import raw data (exmpl: mouse data)
 raw_mouse  <- tiefightR::mouse
 
@@ -142,7 +142,7 @@ k
 Okay, so now we know that we have 8 Cores on our machine (yours might be different!). We will use 6 in the simulation (just to be sure). This example uses only R=2 randomizations to keep things simple. You should increase this R value appropriately. Again, we test the item "Lake" against all the rest of (64-1) possible combinations in the item list (ord).
 The simulation result will be analyzed with the `tie_simrep` function. This will output a Bubbleplot with the calculated positions of the test variable and the achieved worth values. The bubble sizes correspond to the calculated mean intransitivities. In addition, the color codes for the number of variables from the item list that were tested in the respective simulation step. There is also a frequency output table (Ftable) showing the number of times the test variables was positioned in a specific position. If you want to simulate non-binary data, you'll have to use the `tie_binarize` function output as input data in the simulation. Remember: the set uses a randomly fixed set of ties (if present)!
 
-```{r echo=TRUE, fig.height=4, fig.width=5, fig.cap = "Simulation outcome for the 'Lake' item."}
+```{r echo=TRUE, fig.height=4, fig.width=5}
 library(tiefightR)
 # load some data for the simulation 
 raw         <- tiefightR::human

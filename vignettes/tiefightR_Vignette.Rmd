@@ -54,7 +54,7 @@ The output of the `tie_worth` function are worth values that can be ranked for p
 
 Consider the following worth plot for binary mouse data. The distance between two data points is simply the difference between worth values. In the distance matrix the distances for all combinations are calculated. 
 
-```{r echo=FALSE, fig.height=5, fig.width=5, fig.cap = "Concept of the Euclidean distance measurement between worth values.", out.width="60%"}
+```{r echo=FALSE, fig.height=5, fig.width=5, out.width="60%"}
 
 library(tiefightR)
 raw        <- tiefightR::mouse

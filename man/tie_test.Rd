@@ -36,7 +36,7 @@ tie_test(
 \item{against}{any other single variable from the commodity list (or combinations); vectorize if necessary c("item1","item2")}
 }
 \value{
-A frequency table for item positions during the simulation; Tukey's HSD Test for positions; Position Bubble Plot
+A frequency table for item positions during the simulation; Position Bubble Plot
 }
 \description{
 The \code{tie_test} function can be used for individual item testing.

@@ -1,6 +1,8 @@
 #' Main preference function
 #'
-#' The \code{tie_import} function prepares binary and continuous data form import into the tiefightR analysis.
+#' The \code{tie_import} function prepares binary and continuous data form import into the tiefightR analysis. The user has
+#' to specicy the names of the input columns (if they deviate from the default values in the function argument list). The function
+#' randomizes the response variable for any non chosen item test combination and reports the worth values.
 #'
 #' @param xdata imported (binarized) data frame
 #' @param esti worth estimator (default, "worth", alt: "estimator")

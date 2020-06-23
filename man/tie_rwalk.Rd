@@ -48,5 +48,5 @@ tie_rwalk(
 Exports random binarize response for distance cutoff selection
 }
 \description{
-The \code{tie_rwalk} function prepares binary and continuous data form import into the tiefightR analysis.
+The \code{tie_rwalk} function prepares binary and continuous data for tiefightR analysis.
 }

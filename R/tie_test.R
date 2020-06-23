@@ -20,7 +20,7 @@
 #' @importFrom magrittr "%>%"
 #' @import gnm
 #'
-#' @return A frequency table for item positions during the simulation; Tukey's HSD Test for positions; Position Bubble Plot
+#' @return A frequency table for item positions during the simulation; Position Bubble Plot
 #'
 #' @export
 

@@ -1,6 +1,6 @@
 #' Binarize continous data
 #'
-#' Uses \code{tie_import} output as input.
+#' Uses \code{tie_import} non-binary outcome data as input. The outcome variable is randomized for ties in the continous data.
 #'
 #' @param xdata imported (binarized) data frame
 #' @param SV name of the side variable
@@ -22,7 +22,7 @@
 #' @importFrom stats runif
 #' @importFrom magrittr "%>%"
 #'
-#' @return tada
+#' @return binarized data in the default format (colum headers)
 #'
 #' @export
 #'
@@ -71,7 +71,7 @@ tie_binarize <- function(xdata      = NULL,
   }
 
 
-  #set percentage 50% (more than 50%) to 99.9%
+  # set percentage 50% (more than 50%) to 99.9%
   prefLimit <- prefLimit
 
   #check for ties
@@ -81,8 +81,7 @@ tie_binarize <- function(xdata      = NULL,
   xdata$ties[!is.na(xdata$binaryNEW)] <- FALSE
   xx         <- xdata$ties
 
-  #randomize answers for ties
-
+  # randomize answers for ties
   if(setseed==TRUE){
     set.seed(0) # Sets a seed here, so that the randomization is always the same
   }else{}

@@ -1,9 +1,8 @@
 #' Tie Simulation Function
 #'
 #' The \code{tie_sim} function starts a simulation of item pairings and introduces random pairs for the remaining
-#' combinations. In parallel, the intransitivity of triple pairings can be calculated to estimate the quality of
-#' the pairings. Good transitiviy and massed localization in a position will improve the likelihood of a
-#' good fit for the item.
+#' combinations. In parallel, the intransitivity of triple pairings can be calculated to estimate their position quality.
+#' Good transitiviy and massed localization in a position will improve the Likelihood of a good fit for the item.
 #'
 #' @param xdata imported (binarized) data frame
 #' @param SV name of the side variable

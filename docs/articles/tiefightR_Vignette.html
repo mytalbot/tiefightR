@@ -144,11 +144,7 @@
 <a href="#how-many-tests-are-required" class="anchor"></a>How many tests are required?</h2>
 <p>The output of the <code>tie_worth</code> function are worth values that can be ranked for position. When ties are present (or introduced), the worth values will shift. The question is: when can a user be certain that a position is legit when ties are present? In order to stabilise the position in terms of worth values, we use the power of the central tendency shift of the mean. The more often a random test is repeated, the more stable the mean becomes. In order to generalize the different distances we calculate the (Euclidean) distance matrix of the worth values at each randomization step and report the average distance over the number of randomizations. It can be expected that the mean Euclidean distance and the corresponding variance stabilize.</p>
 <p>Consider the following worth plot for binary mouse data. The distance between two data points is simply the difference between worth values. In the distance matrix the distances for all combinations are calculated.</p>
-<div class="figure">
-<img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-4-1.png" alt="Concept of the Euclidean distance measurement between worth values." width="60%"><p class="caption">
-Concept of the Euclidean distance measurement between worth values.
-</p>
-</div>
+<p><img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-4-1.png" width="60%"></p>
 <p>Of course, this only works when ties are present! Otherwise, there would be nothing to randomize.</p>
 <p><img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-5-1.png" width="45%"><img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-5-2.png" width="45%"></p>
 <p>The plots show that the overall change in Euclidean distances is small. The largest step occurs within the first 50 to 75 randomization steps. The corresponding SD of the distances corroborates this. Empirically, for these mouse data, at least 50 randomizations are required to obtain stable mean positions with the tested commodities.</p>

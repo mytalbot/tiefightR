@@ -15,5 +15,8 @@ tie_import(path = NULL, valenceset = NULL)
 data.frame with the filtered subset
 }
 \description{
-The \code{tie_import} function loads the raw data
+The \code{tie_import} function loads the raw data as a data frame. This function can be skipped when one of the three internal
+data sets (human, mouse, rhesus) are used. For a user who wants to import own data this function is a good start. Make sure that
+the imported data has at least the following information: data, subset (even if none is there), SV (side variable, left/right),
+RF (reference fluid/item), CF (combination fluid), id (animal id), RV (response variable)).
 }

@@ -54,8 +54,8 @@ tie_binarize(
 \item{fldrnk}{the name of the standardizedresponse variable in the org data}
 }
 \value{
-tada
+binarized data in the default format (colum headers)
 }
 \description{
-Uses \code{tie_import} output as input.
+Uses \code{tie_import} non-binary outcome data as input. The outcome variable is randomized for ties in the continous data.
 }
