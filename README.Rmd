@@ -44,8 +44,7 @@ devtools::install_github("mytalbot/tiefightR")
 The following function can be used to install single packages - or just the missing ones from CRAN.
 
 ```{r
-install.packages("paste missing package name here ")
-
+install.packages("paste missing package name here") 
 ```
 
 ## The Website and Vignette(s)
