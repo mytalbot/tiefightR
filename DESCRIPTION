@@ -7,7 +7,7 @@ Authors@R: c(
     email = "talbot.steven@mh-hannover.de", role = c("cre","aut"), 
     comment = c(ORCID = "0000-0002-9062-4065") ),
     person("Dana", "Pfefferle", email = "DPfefferle@dpz.eu", role = c("aut") ) ,
-    person("Lewejojann", "Lars", email = "ljohann@phenotyping.de", role = "aut" ))
+    person("Lewejohann", "Lars", email = "ljohann@phenotyping.de", role = "aut" ))
 Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
 Description: The tiefightR package is for preference testing. Its goal is to rank commodity positions
     obtained from preference test experiments. Special attention is laid to intransitivities in the data and tie evaluation.
