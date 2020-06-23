@@ -57,13 +57,13 @@ tie_sim <- function(xdata     = NULL,
   L        <- length(ord)-1
   runs     <- dim(combis)[1]
   res      <- NULL
-
+  h        <- NULL
   # do the parallel processing
-  res   <- foreach (j=1:runs,
+  res   <- foreach (j=2:runs,
                     .combine=rbind, .packages=c("magrittr","tidyverse","reshape2","prefmod","tiefightR","gnm")) %dopar% {
 
                       v2  <- restOrd[combis[j,]==1]
-
+                      h   <- NULL
                       h   <- replicate(R,
                                        tie_worth(xdata     = xdata,
                                                  SV        = SV,

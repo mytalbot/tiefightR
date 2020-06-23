@@ -41,6 +41,8 @@ file](https://github.com/mytalbot/tiefightR/tree/master/sourcefiles) for
 easy installation from within R (or RStudio) if you don’t have devtools
 available.
 
+### Dependencies
+
 **tiefightR** uses the following package as dependencies (in no
 particular order). Installing tiefightR will usually take care of this.
 However, sometimes single dependencies can cause problems and have to be

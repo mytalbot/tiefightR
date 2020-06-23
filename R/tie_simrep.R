@@ -45,7 +45,7 @@ tie_simrep <- function(res=NULL, v1=NULL, path=NULL){
     fit    <- aov(intrans ~ factor(pos), data=ff)
     print(p1)
 
-    return(list(Tukey=TukeyHSD(fit), Ftable=Ftable) )
+    return(Ftable=Ftable)
 
   }else{
     # Export: Frequency table

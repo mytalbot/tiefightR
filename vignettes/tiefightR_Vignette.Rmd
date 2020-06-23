@@ -1,11 +1,11 @@
 ---
-title: "tiefight R Vignette"
+title: "Vignette"
 author: "Steven R. Talbot"
 date: "`r Sys.Date()`"
 output: 
     rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{saga_vignette}
+  %\VignetteIndexEntry{tiefightR_vignette}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -87,7 +87,7 @@ text(1.39, 0.16, "Distance")
 
 Of course, this only works when ties are present! Otherwise, there would be nothing to randomize.
 
-```{r echo=FALSE, warning = FALSE, echo=FALSE, out.width="45%"}
+```{r echo=FALSE, warning = FALSE, out.width="45%"}
 library(tiefightR)
 P <- tie_rwrap(dat        = tiefightR::mouse,
                SV         = "side",
@@ -100,7 +100,7 @@ P <- tie_rwrap(dat        = tiefightR::mouse,
                prefLimit  = 50,
                setseed    = FALSE,
                compstudy  = 1,
-               R          = 3)
+               R          = 150)
 print(P$p1)    
 print(P$p2)  
 ```
@@ -111,7 +111,6 @@ The plots show that the overall change in Euclidean distances is small. The larg
 ## Testing single commodities
 
 With this knowledge, individual items from the commodity list can be tested. The tie_test function was specifically designed to test individual combinations. For example, if the position of the  NaCl item is to be tested (e.g., at 50 randomizations), the user combines this with any other item combination from the list. As a further criterion (and sign of good quality), the intransitivity is computed as well. The user can add more items to the tested "against" list for getting more confidence in the positioning of the tested item (hopefully, with lower intransitivity).
-
 
 ```{r echo=FALSE}
 library(tiefightR)

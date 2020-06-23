@@ -3,7 +3,9 @@ Title: Calculate Preference Positions
 Version: 0.0.0.9000
 Year: 2020
 Authors@R: c(
-    person("Steven", "Talbot", email = "talbot.steven@mh-hannover.de", role = c("cre","aut") ),
+    person("Steven", "Talbot", 
+    email = "talbot.steven@mh-hannover.de", role = c("cre","aut"), 
+    comment = c(ORCID = "0000-0002-9062-4065") ),
     person("Dana", "Pfefferle", email = "DPfefferle@dpz.eu", role = c("aut") ) ,
     person("Lewejojann", "Lars", email = "ljohann@phenotyping.de", role = "aut" ))
 Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
@@ -32,7 +34,6 @@ Imports: magrittr,
     foreach,
     viridis,
     ggsci,
-    Rmisc,
-    qpdf
+    Rmisc
 Depends: 
     R (>= 2.10)
