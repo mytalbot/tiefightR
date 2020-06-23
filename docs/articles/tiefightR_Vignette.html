@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vignette • tiefightR</title>
+<title>tiefightR Vignette • tiefightR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Vignette">
+<script src="../pkgdown.js"></script><meta property="og:title" content="tiefightR Vignette">
 <meta property="og:description" content="tiefightR">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -64,7 +64,7 @@
       <a href="../articles/Examples.html">Examples</a>
     </li>
     <li>
-      <a href="../articles/tiefightR_Vignette.html">Vignette</a>
+      <a href="../articles/tiefightR_Vignette.html">tiefightR Vignette</a>
     </li>
   </ul>
 </li>
@@ -89,7 +89,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Vignette</h1>
+      <h1 data-toc-skip>tiefightR Vignette</h1>
                         <h4 class="author">Steven R. Talbot</h4>
             
             <h4 class="date">2020-06-23</h4>
@@ -105,10 +105,29 @@
 <h2 class="hasAnchor">
 <a href="#tiefighr-for-preference-testing" class="anchor"></a>tiefighR for preference testing</h2>
 <p>Preference tests are a valuable tool to measure the “wants” of individuals and have been proven to be a valid method in order to rate different commodities. The number of commodities presented at the same time is, however, limited and in classical test settings usually only two options are presented. In our paper we evaluate the option of combining multiple binary choices in order to rank preferences among a larger number of commodities. The tiefightR package offers the neccessary tools to test selections of commodities and to obtain an estimate of their relative position.</p>
+<div id="dependencies" class="section level3">
+<h3 class="hasAnchor">
+<a href="#dependencies" class="anchor"></a>Dependencies</h3>
+<p><strong>tiefightR</strong> uses the following packages as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.</p>
+<p>“magrittr”<span class="citation">(Bache and Wickham 2014)</span>,<br>
+“tibble”<span class="citation">(Müller and Wickham 2020)</span>,<br>
+“dplyr”<span class="citation">(Wickham et al. 2020)</span>,<br>
+“reshape2”<span class="citation">(Wickham 2007)</span>,<br>
+“prefmod”<span class="citation">(Hatzinger and Dittrich 2012)</span>,<br>
+“gnm”<span class="citation">(Turner and Firth 2020)</span>,<br>
+“ggplot2”<span class="citation">(Wickham 2016)</span>,<br>
+“ggpubr”<span class="citation">(Kassambara 2020)</span>,<br>
+“foreach”<span class="citation">(Microsoft and Weston 2020)</span>,<br>
+“viridis”<span class="citation">(Garnier 2018)</span>,<br>
+“Rmisc”<span class="citation">(Hope and Hope 2016)</span></p>
+<p>The following function can be used to install single packages - or just the missing ones from CRAN.</p>
+<pre class="{r"><code>install.packages("paste missing package name here ")
+</code></pre>
 </div>
-<div id="general-concept" class="section level2">
+</div>
+<div id="general-concept-of-the-tiefightr-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-concept" class="anchor"></a>General concept</h2>
+<a href="#general-concept-of-the-tiefightr-package" class="anchor"></a>General concept of the tiefightR package</h2>
 <p>For data binarization a preference threshold for ties is needed (by default this is 50% for an equal commodity selection Likelihood). In case of ties, the binary response variable is randomized. Therefore, the analysis has to be repeated multiple times for getting more robust estimates of the tested commodities’ position in the data.</p>
 <p>Further, the tiefighteR package offers simulation capabilities. This will help to determine the position of individual items without having to test the whole data set. The simulation will randomly test an item against all remaining combinations. These calculations are combined with an estimate on the intransitivity which acts as a quality sign for the found position. The simulation results can give an indication for similar data and how new commodities can be positioned.</p>
 </div>
@@ -117,7 +136,7 @@
 <a href="#data" class="anchor"></a>Data</h2>
 <p>We conducted experiments with rhesus macaques, mice, and humans in order to validate the ranking method across species. These data sets are included in the package and are called <code>human</code>, <code>mouse</code> and <code>rhesus</code>. The response variable for human is binary and for rhesus and mouse it is continous (i.e., the amount of drank liquid). In order to harmonize the analysis, the continous data will have to be binarized.</p>
 <p>The following example (mouse) shows how the raw (input) data need to be structured. The “pref_img1” is the binary response variable.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/mouse.html">mouse</a></span>)
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/mouse.html">mouse</a></span>)
 <span class="co">#&gt;         date animalID  side fluidType numOF_visits_with_Licks</span>
 <span class="co">#&gt; 1 09.07.2018  ro_ge_4  left       HCl                       7</span>
 <span class="co">#&gt; 2 09.07.2018  ro_ge_4 right      NaCl                      17</span>
@@ -133,7 +152,7 @@
 <span class="co">#&gt; 5                     34            NaCl       1      722        2097</span>
 <span class="co">#&gt; 6                     34             HCl       1     1375        2097</span></pre></body></html></div>
 <p>The column names in different data sets can be different. Therefore, the functions have fields that need specification. The following names should be adjusted when they are different (e.g. in the <code>tie_worth</code> function).</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"> <span class="no">SV</span>        <span class="kw">=</span> <span class="st">"side"</span>                     <span class="co"># name of the side variable (default = "side_img1")</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"> <span class="no">SV</span>        <span class="kw">=</span> <span class="st">"side"</span>                     <span class="co"># name of the side variable (default = "side_img1")</span>
  <span class="no">RF</span>        <span class="kw">=</span> <span class="st">"fluidType"</span>                <span class="co"># name of the reference fluid variable (default = "img1")</span>
  <span class="no">CF</span>        <span class="kw">=</span> <span class="st">"combinationWith"</span>          <span class="co"># name of the combination fluid variable (default = "img2")</span>
  <span class="no">id</span>        <span class="kw">=</span> <span class="st">"animalID"</span>                 <span class="co"># subject IDs (default = "ID")</span>
@@ -156,6 +175,45 @@
 <pre><code>#&gt;      against worth pos intrans I_sd  upr   lwr
 #&gt; NaCl     HCl  0.19   2   35.33 2.08 40.5 30.16</code></pre>
 <p>NaCl is positioned on position 2 (which is the truth, with HCl in position 1). Adding more items can lower the intransitivity (but depends on the individual intransitivities in the data set).</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<div id="refs" class="references">
+<div id="ref-magrittrcite">
+<p>Bache, Stefan Milton, and Hadley Wickham. 2014. <em>Magrittr: A Forward-Pipe Operator for R</em>. <a href="https://CRAN.R-project.org/package=magrittr" class="uri">https://CRAN.R-project.org/package=magrittr</a>.</p>
+</div>
+<div id="ref-viridiscite">
+<p>Garnier, Simon. 2018. <em>Viridis: Default Color Maps from ’Matplotlib’</em>. <a href="https://CRAN.R-project.org/package=viridis" class="uri">https://CRAN.R-project.org/package=viridis</a>.</p>
+</div>
+<div id="ref-prefmodcit">
+<p>Hatzinger, Reinhold, and Regina Dittrich. 2012. “prefmod: An R Package for Modeling Preferences Based on Paired Comparisons, Rankings, or Ratings.” <em>Journal of Statistical Software</em> 48 (10): 1–31. <a href="http://www.jstatsoft.org/v48/i10/" class="uri">http://www.jstatsoft.org/v48/i10/</a>.</p>
+</div>
+<div id="ref-Hope2016">
+<p>Hope, Author Ryan M, and Maintainer Ryan M Hope. 2016. “Package ‘ Rmisc ’.”</p>
+</div>
+<div id="ref-ggpubrcite">
+<p>Kassambara, Alboukadel. 2020. <em>Ggpubr: ’Ggplot2’ Based Publication Ready Plots</em>. <a href="https://CRAN.R-project.org/package=ggpubr" class="uri">https://CRAN.R-project.org/package=ggpubr</a>.</p>
+</div>
+<div id="ref-foreachcite">
+<p>Microsoft, and Steve Weston. 2020. <em>Foreach: Provides Foreach Looping Construct</em>. <a href="https://CRAN.R-project.org/package=foreach" class="uri">https://CRAN.R-project.org/package=foreach</a>.</p>
+</div>
+<div id="ref-tibblecite">
+<p>Müller, Kirill, and Hadley Wickham. 2020. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a>.</p>
+</div>
+<div id="ref-gnmcite">
+<p>Turner, Heather, and David Firth. 2020. <em>Generalized Nonlinear Models in R: An Overview of the Gnm Package</em>. <a href="https://cran.r-project.org/package=gnm" class="uri">https://cran.r-project.org/package=gnm</a>.</p>
+</div>
+<div id="ref-reshape2cite">
+<p>Wickham, Hadley. 2007. “Reshaping Data with the reshape Package.” <em>Journal of Statistical Software</em> 21 (12): 1–20. <a href="http://www.jstatsoft.org/v21/i12/" class="uri">http://www.jstatsoft.org/v21/i12/</a>.</p>
+</div>
+<div id="ref-ggplot2cite">
+<p>———. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>.</p>
+</div>
+<div id="ref-dplyrcite">
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+</div>
 </div>
   </div>
 

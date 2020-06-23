@@ -22,10 +22,7 @@ knitr::opts_chunk$set(
 
 The goal of tiefightR is to rank commodity positions obtained from preference test experiments.
 
-**Preference tests** are a straightforward approach in asking the appraisal of different goods. To gain a better understanding of the valence of choices made, however, there is a demand for sophisticated tests which allow estimating the strength of the respective preferences. The number of commodities presented at the same time is, however, limited and in classical test settings, usually only two options are presented. Here, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. In the case of continuous data, ties are introduced when the same amount of commodity (e.g. a fluid) was chosen. The tiefightR package creates a ranking system that takes into account the number of ties and intransitivities in the data. This will help the user to rank specific commodities and evaluate the quality of this ranking. In estimating the position of an item, tiefightR takes advantage of the "worth value" in the **prefmod** package [1] with its fit of a Bradley-Terry model.
-
-[1] Hatzinger, R., & Dittrich, R. (2012). prefmod: An R Package for Modeling Preferences Based on Paired Comparisons,
-Rankings, or Ratings. Journal of Statistical Software, 48(10), 1-31.
+**Preference tests** are a straightforward approach in asking the appraisal of different goods. To gain a better understanding of the valence of choices made, however, there is a demand for sophisticated tests which allow estimating the strength of the respective preferences. The number of commodities presented at the same time is, however, limited and in classical test settings, usually only two options are presented. Here, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. In the case of continuous data, ties are introduced when the same amount of commodity (e.g. a fluid) was chosen. The tiefightR package creates a ranking system that takes into account the number of ties and intransitivities in the data. This will help the user to rank specific commodities and evaluate the quality of this ranking. In estimating the position of an item, tiefightR takes advantage of the "worth value" in the **prefmod** package with its fit of a Bradley-Terry model.
 
 ## Installation
 
@@ -40,11 +37,11 @@ devtools::install_github("mytalbot/tiefightR")
 
 ### Dependencies
 
-**tiefightR** uses the following package as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.
+**tiefightR** uses the following packages as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.
 
 "magrittr", "tibble", "dplyr", "reshape2", "prefmod", "gnm", "ggplot2", "ggpubr", "foreach", "viridis", "Rmisc"
 
-The following function can be used to install single packages - or just the missing ones.
+The following function can be used to install single packages - or just the missing ones from CRAN.
 
 ```{r
 install.packages("paste missing package name here ")

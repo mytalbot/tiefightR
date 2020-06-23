@@ -1,9 +1,10 @@
 ---
-title: "Vignette"
+title: "tiefightR Vignette"
 author: "Steven R. Talbot"
 date: "`r Sys.Date()`"
 output: 
     rmarkdown::html_vignette
+bibliography: tiefightR_lib.bib
 vignette: >
   %\VignetteIndexEntry{tiefightR_vignette}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,11 +22,34 @@ knitr::opts_chunk$set(
 
 Preference tests are a valuable tool to measure the "wants" of individuals and have been proven to be a valid method in order to rate different commodities. The number of commodities presented at the same time is, however, limited and in classical test settings usually only two options are presented. In our paper we evaluate the option of combining multiple binary choices in order to rank preferences among a larger number of commodities. The tiefightR package offers the neccessary tools to test selections of commodities and to obtain an estimate of their relative position. 
 
-## General concept
+### Dependencies
+
+**tiefightR** uses the following packages as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.
+
+"magrittr"[@magrittrcite],  
+"tibble"[@tibblecite],  
+"dplyr"[@dplyrcite],  
+"reshape2"[@reshape2cite],  
+"prefmod"[@prefmodcit],  
+"gnm"[@gnmcite],  
+"ggplot2"[@ggplot2cite],   
+"ggpubr"[@ggpubrcite],   
+"foreach"[@foreachcite],   
+"viridis"[@viridiscite],  
+"Rmisc"[@Hope2016]  
+
+The following function can be used to install single packages - or just the missing ones from CRAN.
+
+```{r
+install.packages("paste missing package name here ")
+
+```
+## General concept of the tiefightR package
 
 For data binarization a preference threshold for ties is needed (by default this is 50% for an equal commodity selection Likelihood). In case of ties, the binary response variable is randomized. Therefore, the analysis has to be repeated multiple times for getting more robust estimates of the tested commodities' position in the data. 
 
 Further, the tiefighteR package offers simulation capabilities. This will help to determine the position of individual items without having to test the whole data set. The simulation will randomly test an item against all remaining combinations. These calculations are combined with an estimate on the intransitivity which acts as a quality sign for the found position. The simulation results can give an indication for similar data and how new commodities can be positioned.
+
 
 ## Data
 
@@ -141,7 +165,7 @@ mytest
 
 NaCl is positioned on position 2 (which is the truth, with HCl in position 1). Adding more items can lower the intransitivity (but depends on the individual intransitivities in the data set).
 
-
+## References
 
 
 

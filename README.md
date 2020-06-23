@@ -26,11 +26,7 @@ ranking system that takes into account the number of ties and
 intransitivities in the data. This will help the user to rank specific
 commodities and evaluate the quality of this ranking. In estimating the
 position of an item, tiefightR takes advantage of the “worth value” in
-the **prefmod** package \[1\] with its fit of a Bradley-Terry model.
-
-\[1\] Hatzinger, R., & Dittrich, R. (2012). prefmod: An R Package for
-Modeling Preferences Based on Paired Comparisons, Rankings, or Ratings.
-Journal of Statistical Software, 48(10), 1-31.
+the **prefmod** package with its fit of a Bradley-Terry model.
 
 ## Installation
 
@@ -49,7 +45,7 @@ available.
 
 ### Dependencies
 
-**tiefightR** uses the following package as dependencies (in no
+**tiefightR** uses the following packages as dependencies (in no
 particular order). Installing tiefightR will usually take care of this.
 However, sometimes single dependencies can cause problems and have to be
 installed manually.
@@ -58,7 +54,7 @@ installed manually.
 “ggpubr”, “foreach”, “viridis”, “Rmisc”
 
 The following function can be used to install single packages - or just
-the missing ones.
+the missing ones from CRAN.
 
 ``` {r
 install.packages("paste missing package name here ")

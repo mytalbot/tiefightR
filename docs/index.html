@@ -65,7 +65,7 @@
       <a href="articles/Examples.html">Examples</a>
     </li>
     <li>
-      <a href="articles/tiefightR_Vignette.html">Vignette</a>
+      <a href="articles/tiefightR_Vignette.html">tiefightR Vignette</a>
     </li>
   </ul>
 </li>
@@ -101,8 +101,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The goal of tiefightR is to rank commodity positions obtained from preference test experiments.</p>
-<p><strong>Preference tests</strong> are a straightforward approach in asking the appraisal of different goods. To gain a better understanding of the valence of choices made, however, there is a demand for sophisticated tests which allow estimating the strength of the respective preferences. The number of commodities presented at the same time is, however, limited and in classical test settings, usually only two options are presented. Here, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. In the case of continuous data, ties are introduced when the same amount of commodity (e.g. a fluid) was chosen. The tiefightR package creates a ranking system that takes into account the number of ties and intransitivities in the data. This will help the user to rank specific commodities and evaluate the quality of this ranking. In estimating the position of an item, tiefightR takes advantage of the “worth value” in the <strong>prefmod</strong> package <br><span class="math display">1</span><br> with its fit of a Bradley-Terry model.</p>
-<p><br><span class="math display">1</span><br> Hatzinger, R., &amp; Dittrich, R. (2012). prefmod: An R Package for Modeling Preferences Based on Paired Comparisons, Rankings, or Ratings. Journal of Statistical Software, 48(10), 1-31.</p>
+<p><strong>Preference tests</strong> are a straightforward approach in asking the appraisal of different goods. To gain a better understanding of the valence of choices made, however, there is a demand for sophisticated tests which allow estimating the strength of the respective preferences. The number of commodities presented at the same time is, however, limited and in classical test settings, usually only two options are presented. Here, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. In the case of continuous data, ties are introduced when the same amount of commodity (e.g. a fluid) was chosen. The tiefightR package creates a ranking system that takes into account the number of ties and intransitivities in the data. This will help the user to rank specific commodities and evaluate the quality of this ranking. In estimating the position of an item, tiefightR takes advantage of the “worth value” in the <strong>prefmod</strong> package with its fit of a Bradley-Terry model.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -113,9 +112,9 @@
 <div id="dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h3>
-<p><strong>tiefightR</strong> uses the following package as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.</p>
+<p><strong>tiefightR</strong> uses the following packages as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.</p>
 <p>“magrittr”, “tibble”, “dplyr”, “reshape2”, “prefmod”, “gnm”, “ggplot2”, “ggpubr”, “foreach”, “viridis”, “Rmisc”</p>
-<p>The following function can be used to install single packages - or just the missing ones.</p>
+<p>The following function can be used to install single packages - or just the missing ones from CRAN.</p>
 <pre class="{r"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("paste missing package name here ")</a></code></pre>
 </div>
 </div>
