@@ -9,8 +9,9 @@ Authors@R: c(
     person("Dana", "Pfefferle", email = "DPfefferle@dpz.eu", role = c("aut") ) ,
     person("Lewejohann", "Lars", email = "ljohann@phenotyping.de", role = "aut" ))
 Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
-Description: The tiefightR package is for preference testing. Its goal is to rank commodity positions
-    obtained from preference test experiments. Special attention is laid to intransitivities in the data and tie evaluation.
+Description: The tiefightR package is for preference test evaluation and simulation. Its goal is to rank commodity positions
+    obtained from preference test experiments. Special attention goes into the analysis of intransitivities in the data and 
+    resulting tie evaluation after data binarization.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
