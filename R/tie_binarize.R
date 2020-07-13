@@ -28,13 +28,13 @@
 #'
 
 tie_binarize <- function(xdata      = NULL,
-                         SV         = "side",
-                         RF         = "fluidType",
-                         CF         = "combinationWith",
-                         id         = "animalID",
-                         RV         = "numOF_visits_with_Licks",
+                         SV         = NULL,
+                         RF         = NULL,
+                         CF         = NULL,
+                         id         = NULL,
+                         RV         = NULL,
                          datalabel  = "binarized",
-                         compiled_studies	 = 1,
+                         compiled_studies	 = NULL,
                          setseed    = TRUE,
                          prefLimit  = 50,
                          sidevar    = "side",
@@ -103,7 +103,7 @@ tie_binarize <- function(xdata      = NULL,
   levels(as.factor(xdata$test_no) )#1,2
   dataSet1 <- xdata %>%
     as_tibble() %>%
-    filter(test_no	== compiled_studies	)
+    dplyr::filter(test_no	== compiled_studies	)
 
   # need to drop levels due to separating the datasets
   dataSet1 <- dataSet1 %>%

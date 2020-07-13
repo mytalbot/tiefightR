@@ -40,7 +40,6 @@ tie_rwalk  <- function(dat        = NULL,
 
   # binarize data automatically, if continous
   if ( (all(responseV %in% 0:1))==FALSE ) {
-
     bin_mouse  <- tie_binarize(xdata  = dat,
                                SV   = SV,
                                RF   = RF,
@@ -58,14 +57,10 @@ tie_rwalk  <- function(dat        = NULL,
 
     res        <-  mouse$worth
 
-  }else{ # binary
 
-    mouse      <- tie_worth(xdata   = dat,
-                            SV      = SV,
-                            RF      = RF,
-                            CF      = CF,
-                            id      = id,
-                            RV      = RV,
+
+  }else{ # binary
+    mouse      <- tie_worth(xdata         = dat,
                             compstudy     = compstudy,
                             default       = default,
                             ordn          = ord)

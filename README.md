@@ -15,9 +15,9 @@ preference test experiments.
 **Preference tests** are a straightforward approach in asking the
 appraisal of different goods. To gain a better understanding of the
 valence of choices made, however, there is a demand for sophisticated
-tests which allow estimating the strength of the respective preferences.
+tests that allow estimating the strength of the respective preferences.
 The number of commodities presented at the same time is, however,
-limited and in classical test settings, usually only two options are
+limited, and in classical test settings, usually, only two options are
 presented. Here, we evaluate the option of combining multiple binary
 choices to rank preferences among a larger number of commodities. In the
 case of continuous data, ties are introduced when the same amount of
@@ -51,7 +51,7 @@ However, sometimes single dependencies can cause problems and have to be
 installed manually.
 
 “magrittr”, “tibble”, “dplyr”, “reshape2”, “prefmod”, “gnm”, “ggplot2”,
-“ggpubr”, “foreach”, “viridis”, “Rmisc”
+“ggpubr”, “foreach”, “viridis”, “ggsci”, Rmisc“,”doRNG"
 
 The following function can be used to install single packages - or just
 the missing ones from CRAN.

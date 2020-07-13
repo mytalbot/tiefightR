@@ -1,0 +1,178 @@
+---
+title: "tiefightR Cutoff Definitions"
+author: "Steven R. Talbot"
+date: "`r Sys.Date()`"
+output: 
+    rmarkdown::html_vignette
+bibliography: tiefightR_lib.bib
+vignette: >
+  %\VignetteIndexEntry{tiefightR_cutoffs}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Commodity positioning
+
+Ties are likely to be present in the data when the response variable of a preference test is binarized. This happens when
+it is unclear which commodity was preferred by the animal (e.g., when they drank the same amount of liquid). The number of introduced ties will depend on a plethora of factors - of which a very prominent one is the type of commodity. If the animals are especially fond of two similar substances and cannot decide which one they like better, ties are likely. In the binarization process, the stochastic process whether a tie is A or B is modeled by a probability factor (e.g., prefLim=50%) so that the chances of choosing A = B. This can be changed to a more "conservative" rate of, e.g., 66% (as it was reported in the literature). This will, however, introduce more ties...
+
+Eventually, the number of ties will influence the position of a commodity in the ranking of a worth plot. We propose a bootstrapping method that relies on randomizing the ties to determine the "true" position of a commodity. At a small number of randomizations, the position is volatile, which is also indicated by large 95% confidence intervals. The more randomizations are used, the more certain the position of the item becomes.
+
+Here are two examples from the "mouse" data (study 1) at a prefLim of 50% and 95% confidence intervals. The first example was calculated with R=2 randomizations and the second one with R=10.
+
+### R=2 randomizations
+
+```{r echo=FALSE, fig.height=4, fig.width=6, warning = FALSE}
+library(tiefightR)
+suppressWarnings(library(ggplot2))
+suppressWarnings(library(ggpubr))
+
+suppressWarnings(errorplot <- tie_cicheck(data       = tiefightR::mouse,
+                         R          = 2, # max this FTW!
+                         prefLimit  = 50,
+                         ciLvl      = 0.95,
+                         seed       = TRUE,
+                         SV         = "side",
+                         RF         = "fluidType",
+                         CF         = "combinationWith",
+                         id         = "animalID",
+                         RV         = "numOF_visits_with_Licks",
+                         ord        = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"),
+                         compstudy  = 1,
+                         default    = "HCL",
+                         showplot   = TRUE,
+                         showstats  = FALSE))
+
+```
+
+
+### R=10 randomizations
+
+```{r echo=FALSE, fig.height=4, fig.width=6, warning = FALSE}
+library(tiefightR)
+library(ggplot2)
+library(ggpubr)
+
+errorplot <- tie_cicheck(data       = tiefightR::mouse,
+                         R          = 10, # max this FTW!
+                         prefLimit  = 50,
+                         ciLvl      = 0.95,
+                         seed       = TRUE,
+                         SV         = "side",
+                         RF         = "fluidType",
+                         CF         = "combinationWith",
+                         id         = "animalID",
+                         RV         = "numOF_visits_with_Licks",
+                         ord        = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"),
+                         compstudy  = 1,
+                         default    = "HCL",
+                         showplot   = TRUE,
+                         showstats  = FALSE)
+```
+
+Note, how small the 95% confidence intervals have become. The position of the commodities are now relatively unambigous. 
+
+## Cutoff definition
+
+So, how many randomizations are needed?  
+
+Since the result asymptotically approaches an optimum at an increased computational cost, it is better to define a reasonable cutoff and live with some error. In the following example, "mouse" data (study 1) are tested for both, 50% and 66% prefLim. Both analyses were run for up to R=35 randomizations and at each R-step the mean Euclidean distance between the worth values was calculated plus the 95% confidence intervals. As long as the commodity positions are still "moving" they will show increased distance values and confidence intervals. Once they reach a stable position the distance will stabilize. In the second plot, the range of the confidence intervals was standardized to 1, to be able to compare both analyses. All ranges were compared to the maximum range in each plot and a cutoff was set at <10% of the maximum range to determine a threshold for the number of needed randomizations. Another example could be 5% but the computational cost will be significantly higher.
+
+**A word of caution:** These calculations use the tie_cutoff function and require multiple cpus. Your platform should at least have two cpus to handle this.
+
+
+```{r echo=FALSE, fig.height=4, fig.width=6, warning = FALSE, set.seed(123)}
+knitr::opts_chunk$set(cache = T)
+library(tiefightR)
+library(ggplot2)
+library(ggpubr)
+
+
+cutoff_50 <- tie_cutoff(data  = tiefightR::mouse, 
+                        R          = 35,
+                        ciLvl      = 0.95,
+                        cpus       = 6,
+                        SV         = "side",
+                        RF         = "fluidType",
+                        CF         = "combinationWith",
+                        id         = "animalID",
+                        RV         = "numOF_visits_with_Licks",
+                        ord        = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"),
+                        prefLimit  = 50,
+                        compstudy  = 1,
+                        default    = "HCL")
+ 
+cutoff_66 <- tie_cutoff(data       =tiefightR::mouse,  
+                        R          = 35,
+                        ciLvl      = 0.95,
+                        cpus       = 6,
+                        SV         = "side",
+                        RF         = "fluidType",
+                        CF         = "combinationWith",
+                        id         = "animalID",
+                        RV         = "numOF_visits_with_Licks",
+                        ord        = c("m10MSac", "m5MSac", "HCl", "NaCl", "water"),
+                        prefLimit  = 66,
+                        compstudy  = 1,
+                        default    = "HCL")
+
+# combine data
+d1 <- cutoff_50
+d2 <- cutoff_66
+
+# calulate the normalized CI range
+d1$Cidelta <- NULL
+d1$Cidelta <- (d1$upr-d1$lwr)/max(d1$upr-d1$lwr, na.rm=TRUE)
+d2$Cidelta <- NULL
+d2$Cidelta <- (d2$upr-d2$lwr)/max(d2$upr-d2$lwr, na.rm=TRUE)
+
+# merge
+d1$preflevel <- "50%"
+d2$preflevel <- "66%"
+df <- rbind(d1,d2)
+
+# plot the distances with CIs
+praw <- ggplot(df, aes(x=factor(R), y=dist, color=preflevel)) +
+  geom_point() +
+  geom_errorbar(aes(ymin=lwr, ymax=upr), width=.1 )+
+  ylab("Mean Euclidean distance") +
+  xlab("Randomizations") +
+  labs(colour="Preference Limit") +
+  scale_x_discrete(breaks = seq(1, 50, by = 4)) +
+  theme_classic()
+praw <- praw + scale_colour_manual(values=c("red","#663399"))
+praw <- praw + theme(legend.position = c(0.85, 0.9))
+praw
+
+# where is the cutoff?
+threshold <- 0.10
+thr_50    <- which(d1$Cidelta <  threshold)[1]
+thr_66    <- which(d2$Cidelta <  threshold)[1]
+
+pci <- ggplot(df, aes(x=factor(R), y=Cidelta, color=preflevel)) +
+  geom_point() +
+  ylab("Standardized range of CIs") +
+  xlab("Randomizations") +
+  labs(colour="Preference Limit") +
+  scale_x_discrete(breaks = seq(1, 50, by = 4)) +
+  theme_classic()
+pci <- pci + scale_colour_manual(values=c("red","#663399"))
+pci <- pci + theme(legend.position = c(0.85, 0.9))
+pci <- pci + geom_hline(yintercept =threshold   , linetype="dotted", color="black")
+pci <- pci + geom_vline(xintercept =thr_50, linetype="dashed", color="red")
+pci <- pci + geom_vline(xintercept =thr_66, linetype="dashed", color="#663399")
+pci
+
+print(paste("Cutoff threshold 50% prefLimit: ", thr_50, " randomizations are needed", sep=""))
+print(paste("Cutoff threshold 66% prefLimit: ", thr_66, " randomizations are needed", sep=""))
+
+```
+
+

@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 ## The tiefightR package
 
-...offers various functions for the position-assessment of a commodity obtained from a preference test experiment. The analysis of binary data and continous data is possible. However, in case of the latter ties will be introduced in case of equal test results. The package offers solutions (mainly by using randomizations) to conquer this problem. For each data set the intransitivity values are calculated as well. This offers some sort of quality assessment for the analysed data. A user can rank unknown commodities using different combinations of the remaining items in his test list. This vignette will give a basic understanding what can be done with the package. We'll make use of the three internalized data sets for the purpose of theses examples.
+...offers various functions for the position-assessment of a commodity obtained from a preference test experiment. The analysis of binary data and continuous data is possible. However, in the case of the latter ties will be introduced in case of equal test results. The package offers solutions (mainly by using randomizations) to conquer this problem. For each data set, the intransitivity values are calculated as well. This offers some sort of quality assessment for the analyzed data. A user can rank unknown commodities using different combinations of the remaining items in his test list. This vignette will give a basic understanding of what can be done with the package. We'll make use of the three internalized data sets for theses examples.
 
 ### Use case 1: human data (binary outcome data) - full set analysis
 
@@ -47,7 +47,7 @@ humantest$intrans
 
 ### Use case 2: human data (binary outcome data) - test individual items
 
-Let's say we want to test the position of "Lake". Then we'll have to add the varialbe r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example we test against r2="Cat". This vector can be expanded with any item from the full list. The `tie_worth` function will take any combination of "Lake" vs "Cat" and **randomizes** the outcome variable (pref_img1) for the remaining combinations. This way the position of "Lake" will tested agains random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get "fair" estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depend on the data set. However, in the "tiefightR Vignette" a minimum of 50 radnomizations seems reasonable for the mouse data. You'll notice, that the worth values are different compared to use case 1. The function arguments (SV...RV) are the default settings and have not to be repeated here again. 
+Let's say we want to test the position of "Lake". Then we'll have to add the variable r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example, we test against r2="Cat". This vector can be expanded with any item from the full list. The `tie_worth` function will take any combination of "Lake" vs "Cat" and **randomizes** the outcome variable (pref_img1) for the remaining combinations. This way the position of "Lake" will test against random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get "fair" estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depends on the data set. However, in the "tiefightR Vignette" a minimum of 50 randomizations seems reasonable for the mouse data. You'll notice, that the worth values are different compared to use case 1. The function arguments (SV...RV) are the default settings and have not to be repeated here again.
 
 ```{r, fig.height=4, fig.width=4}
 
@@ -64,7 +64,7 @@ human_test2$worth
 
 ### Use case 3: mouse data (continous data)
 
-The problem of position evaluation become more difficult when data are non-binary. This will automatically introduce ties for items with the same continous outcome. In order to work with these data, they'll have to be binarized (`tie_binarize`)first and then analysed with the `tie_worth` function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument comstudy has changed as well since in these data, the names for the subgroups are different. The variables (SV, RF, CF, id and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the "original" data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continous) ties beeing 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%. 
+The problem of position evaluation becomes more difficult when data are non-binary. This will automatically introduce ties for items with the same continuous outcome. To work with these data, they'll have to be binarized (`tie_binarize`)first and then analyzed with the `tie_worth` function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument “compstudy” has changed as well since, in these data, the names for the subgroups are different. The variables (SV, RF, CF, id, and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the "original" data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continuous) ties being 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.
 
 ```{r, fig.height=4, fig.width=4}
 # Import raw data (exmpl: mouse data)
@@ -105,7 +105,7 @@ mouse1$intrans
 
 ## Use case 4: Individual test scenario (human data)
 
-Although the function from the prior use cases allow individual testing, the tiefightR package offers a distinct function for testing variable combinations. The resulting table yields the mean intransitivity value plus the 95% confidence interval. This function can be used to test a data set for the number of randomizations needed to adjust for potential ties.
+Although the function from the prior use cases allows individual testing, the tiefightR package offers a distinct function for testing variable combinations. The resulting table yields the mean intransitivity value plus the 95% confidence interval. This function can be used to test a data set for the number of randomizations needed to adjust for potential ties.
 
 ```{r}
 # Observe the position and mean intransitivity after R randomizations
@@ -126,9 +126,10 @@ mytest
 
 ## Use case 5: Simulation (human data)
 
-The above shown use cases are good for single tests when the combination of items is evident. However, in reality the order of items is unclear. Simulation is a good start for ranking an item without knowing too much about the remaining combinations and transitivies. The `tie_sim` function will test an item against all possible combinations (as shown above) but will, additionally, randomize the results R-times. The resulting mean worth values and mean intransitivity values indicate the quality of the item's position.
+The above-shown use cases are good for single tests when the combination of items is evident. However, in reality, the order of items is unclear. Simulation is a good start for ranking an item without knowing too much about the remaining combinations and transitivity. The `tie_sim` function will test an item against all possible combinations (as shown above) but will, additionally, randomize the results R-times. The resulting mean worth values and mean intransitivity values indicate the quality of the item's position.
 
-Standard R will only work on a single thread. Since simulations are computationally intense, the `tie_sim` function employs parallel computation. You should only perform these calculations if you're working on a machine with multipe cores (CPUs). The following function will help you determine the number of cores on your machine. 
+Standard R will only work on a single thread. Since simulations are computationally intense, the `tie_sim` function employs parallel computation. You should only perform these calculations if you're working on a machine with multiple cores (CPUs). The following function will help you determine the number of cores on your machine.
+
 
 ```{r}
 ### Check the number of available CPU cores on your machine.
@@ -139,8 +140,10 @@ k <- tie_cores()
 k
 ```
 
-Okay, so now we know that we have 8 Cores on our machine (yours might be different!). We will use 6 in the simulation (just to be sure). This example uses only R=2 randomizations to keep things simple. You should increase this R value appropriately. Again, we test the item "Lake" against all the rest of (64-1) possible combinations in the item list (ord).
-The simulation result will be analyzed with the `tie_simrep` function. This will output a Bubbleplot with the calculated positions of the test variable and the achieved worth values. The bubble sizes correspond to the calculated mean intransitivities. In addition, the color codes for the number of variables from the item list that were tested in the respective simulation step. There is also a frequency output table (Ftable) showing the number of times the test variables was positioned in a specific position. If you want to simulate non-binary data, you'll have to use the `tie_binarize` function output as input data in the simulation. Remember: the set uses a randomly fixed set of ties (if present)!
+Okay, so now we know that we have 8 Cores on our machine (yours might be different!). We will use 6 in the simulation (just to be sure). This example uses only R=2 randomizations to keep things simple. You should increase this R-value appropriately. Again, we test the item "Lake" against all the rest of (64-1) possible combinations in the item list (ord).
+
+The simulation result will be analyzed with the `tie_simrep` function. This will output a Bubbleplot with the calculated positions of the test variable and the achieved worth values. The bubble sizes correspond to the calculated mean intransitivities. Also, the color codes for the number of variables from the item list that were tested in the respective simulation step. There is also a frequency output table (Ftable) showing the number of times the test variables were positioned in a specific position. If you want to simulate non-binary data, you'll have to use the `tie_binarize` function output as input data in the simulation. Remember: the set uses a randomly fixed set of ties (if present)!
+
 
 ```{r echo=TRUE, fig.height=4, fig.width=5}
 library(tiefightR)

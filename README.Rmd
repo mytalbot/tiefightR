@@ -39,7 +39,7 @@ devtools::install_github("mytalbot/tiefightR")
 
 **tiefightR** uses the following packages as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.
 
-"magrittr", "tibble", "dplyr", "reshape2", "prefmod", "gnm", "ggplot2", "ggpubr", "foreach", "viridis", "Rmisc"
+"magrittr", "tibble", "dplyr", "reshape2", "prefmod", "gnm", "ggplot2", "ggpubr", "foreach", "viridis", "ggsci", Rmisc"
 
 The following function can be used to install single packages - or just the missing ones from CRAN.
 
