@@ -20,7 +20,7 @@
 #' @param default default item in worth value estimation (usually the lowest worth value)
 #' @param compstudy label of the compiled sub study (used for filtering)
 #' @param showplot show the plot for randomization cutoff determination
-#' @param cutoff Percent cutoff level (default: 0.05) - means CI range < than cutoff value
+#' @param cutoff Percent cutoff level (default: 0.10) - means CI range < than cutoff value
 #' @param showCutoff show vertical line of the cutoff
 #' @param standardize standardize on the maximum CI value?
 #'
@@ -41,7 +41,7 @@
 #' @export
 #'
 #'
-tie_cutoff <- function(data=tiefightR::mouse, R=50, ciLvl= 0.95, cpus=2, SV=NULL, RF=NULL,
+tie_cutoff <- function(data=tiefightR::mouse, R=50, ciLvl= 0.95, cutoff=0.1, cpus=2, SV=NULL, RF=NULL,
                        CF=NULL,id=NULL, RV=NULL, ord=NULL, prefLimit=50, compstudy=NULL,
                        default=NULL, showplot=FALSE, showCutoff=FALSE){
 
@@ -94,5 +94,10 @@ tie_cutoff <- function(data=tiefightR::mouse, R=50, ciLvl= 0.95, cpus=2, SV=NULL
   pos <- pos %>%
     mutate(pos, normdelta=pos$delta/max(pos$delta, na.rm=TRUE))
 
-  return(pos)
+  # Calculate a threshold
+  Cidelta <- c()
+  Cidelta <- (pos$upr-pos$lwr)/max(pos$upr-pos$lwr, na.rm=TRUE)
+  thr     <- which(Cidelta <  cutoff)[1]
+
+  return(list(pos=pos, thr=thr))
 }

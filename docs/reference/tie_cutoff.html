@@ -157,6 +157,7 @@ range of the CIs regarding the maximum range in the data, a cutoff for the numbe
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>tiefightR</span><span class='kw ns'>::</span><span class='no'><a href='mouse.html'>mouse</a></span>,
   <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>50</span>,
   <span class='kw'>ciLvl</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>cpus</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>SV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>RF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -177,6 +178,10 @@ range of the CIs regarding the maximum range in the data, a cutoff for the numbe
     <tr>
       <th>R</th>
       <td><p>number of maximum randomization steps</p></td>
+    </tr>
+    <tr>
+      <th>cutoff</th>
+      <td><p>Percent cutoff level (default: 0.10) - means CI range &lt; than cutoff value</p></td>
     </tr>
     <tr>
       <th>cpus</th>
@@ -229,10 +234,6 @@ range of the CIs regarding the maximum range in the data, a cutoff for the numbe
     <tr>
       <th>dat</th>
       <td><p>imported raw data (should be binary, if not, will be binarized automatically)</p></td>
-    </tr>
-    <tr>
-      <th>cutoff</th>
-      <td><p>Percent cutoff level (default: 0.05) - means CI range &lt; than cutoff value</p></td>
     </tr>
     <tr>
       <th>standardize</th>

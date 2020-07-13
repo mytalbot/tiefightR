@@ -8,6 +8,7 @@ tie_cutoff(
   data = tiefightR::mouse,
   R = 50,
   ciLvl = 0.95,
+  cutoff = 0.1,
   cpus = 2,
   SV = NULL,
   RF = NULL,
@@ -24,6 +25,8 @@ tie_cutoff(
 }
 \arguments{
 \item{R}{number of maximum randomization steps}
+
+\item{cutoff}{Percent cutoff level (default: 0.10) - means CI range < than cutoff value}
 
 \item{cpus}{No. of used local CPUs for parallel computing (you should have more than 2)}
 
@@ -50,8 +53,6 @@ tie_cutoff(
 \item{showCutoff}{show vertical line of the cutoff}
 
 \item{dat}{imported raw data (should be binary, if not, will be binarized automatically)}
-
-\item{cutoff}{Percent cutoff level (default: 0.05) - means CI range < than cutoff value}
 
 \item{standardize}{standardize on the maximum CI value?}
 }

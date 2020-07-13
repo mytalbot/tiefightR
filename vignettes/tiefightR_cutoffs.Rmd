@@ -94,11 +94,13 @@ library(tiefightR)
 library(ggplot2)
 library(ggpubr)
 
+cutoff    <- 0.1
 
 cutoff_50 <- tie_cutoff(data  = tiefightR::mouse, 
                         R          = 35,
                         ciLvl      = 0.95,
                         cpus       = 6,
+                        cutoff     = cutoff,
                         SV         = "side",
                         RF         = "fluidType",
                         CF         = "combinationWith",
@@ -113,6 +115,7 @@ cutoff_66 <- tie_cutoff(data       =tiefightR::mouse,
                         R          = 35,
                         ciLvl      = 0.95,
                         cpus       = 6,
+                        cutoff     = cutoff,
                         SV         = "side",
                         RF         = "fluidType",
                         CF         = "combinationWith",
@@ -124,8 +127,8 @@ cutoff_66 <- tie_cutoff(data       =tiefightR::mouse,
                         default    = "HCL")
 
 # combine data
-d1 <- cutoff_50
-d2 <- cutoff_66
+d1 <- cutoff_50$pos
+d2 <- cutoff_66$pos
 
 # calulate the normalized CI range
 d1$Cidelta <- NULL
@@ -152,9 +155,9 @@ praw <- praw + theme(legend.position = c(0.85, 0.9))
 praw
 
 # where is the cutoff?
-threshold <- 0.10
-thr_50    <- which(d1$Cidelta <  threshold)[1]
-thr_66    <- which(d2$Cidelta <  threshold)[1]
+ 
+thr_50    <- cutoff_50$thr
+thr_66    <- cutoff_66$thr
 
 pci <- ggplot(df, aes(x=factor(R), y=Cidelta, color=preflevel)) +
   geom_point() +
@@ -165,7 +168,7 @@ pci <- ggplot(df, aes(x=factor(R), y=Cidelta, color=preflevel)) +
   theme_classic()
 pci <- pci + scale_colour_manual(values=c("red","#663399"))
 pci <- pci + theme(legend.position = c(0.85, 0.9))
-pci <- pci + geom_hline(yintercept =threshold   , linetype="dotted", color="black")
+pci <- pci + geom_hline(yintercept =cutoff, linetype="dotted", color="black")
 pci <- pci + geom_vline(xintercept =thr_50, linetype="dashed", color="red")
 pci <- pci + geom_vline(xintercept =thr_66, linetype="dashed", color="#663399")
 pci
