@@ -113,9 +113,9 @@ text(1.39, 0.16, "Distance")
 
 Of course, this only works when ties are present! Otherwise, there would be nothing to randomize.
 
+### How to determine an opitmal cutoff?
 
-The plots show that the overall change in Euclidean distances is small. The largest step occurs within the first 50 to 75 randomization steps. The corresponding SD of the distances corroborates this. Empirically, for these mouse data, at least 50 randomizations are required to obtain stable mean positions with the tested commodities.
-
+The largest change in Euclidean distance occurs within the first randomization steps. The corresponding uncertainty of the distances corroborates this (95% CIs). The package contains two specific functions (`tie_cicheck` and `tie_cutoff`) that can be used for thresholding. The [`tiefightR_cutoffs`](https://talbotsr.com/tiefightR/articles/tiefightR_cutoffs.html) Vignette shows an example of how a reasonable cutoff for a discrete number of randomizations can be achieved for a specific set of data.
 
 ## Testing single commodities
 

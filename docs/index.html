@@ -18,8 +18,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Calculate Preference Positions ">
-<meta property="og:description" content="The tiefightR package is for preference testing. Its goal is to rank commodity positions
-    obtained from preference test experiments. Special attention is laid to intransitivities in the data and tie evaluation.">
+<meta property="og:description" content="The tiefightR package is for preference test evaluation and simulation. Its goal is to rank commodity positions
+    obtained from preference test experiments. Special attention goes into the analysis of intransitivities in the data and 
+    resulting tie evaluation after data binarization.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -65,6 +66,9 @@
       <a href="articles/Examples.html">Examples</a>
     </li>
     <li>
+      <a href="articles/tiefightR_cutoffs.html">tiefightR Cutoff Definitions</a>
+    </li>
+    <li>
       <a href="articles/tiefightR_Vignette.html">tiefightR Vignette</a>
     </li>
   </ul>
@@ -101,7 +105,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The goal of tiefightR is to rank commodity positions obtained from preference test experiments.</p>
-<p><strong>Preference tests</strong> are a straightforward approach in asking the appraisal of different goods. To gain a better understanding of the valence of choices made, however, there is a demand for sophisticated tests which allow estimating the strength of the respective preferences. The number of commodities presented at the same time is, however, limited and in classical test settings, usually only two options are presented. Here, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. In the case of continuous data, ties are introduced when the same amount of commodity (e.g. a fluid) was chosen. The tiefightR package creates a ranking system that takes into account the number of ties and intransitivities in the data. This will help the user to rank specific commodities and evaluate the quality of this ranking. In estimating the position of an item, tiefightR takes advantage of the “worth value” in the <strong>prefmod</strong> package with its fit of a Bradley-Terry model.</p>
+<p><strong>Preference tests</strong> are a straightforward approach in asking the appraisal of different goods. To gain a better understanding of the valence of choices made, however, there is a demand for sophisticated tests that allow estimating the strength of the respective preferences. The number of commodities presented at the same time is, however, limited, and in classical test settings, usually, only two options are presented. Here, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. In the case of continuous data, ties are introduced when the same amount of commodity (e.g. a fluid) was chosen. The tiefightR package creates a ranking system that takes into account the number of ties and intransitivities in the data. This will help the user to rank specific commodities and evaluate the quality of this ranking. In estimating the position of an item, tiefightR takes advantage of the “worth value” in the <strong>prefmod</strong> package with its fit of a Bradley-Terry model.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -113,7 +117,7 @@
 <h3 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h3>
 <p><strong>tiefightR</strong> uses the following packages as dependencies (in no particular order). Installing tiefightR will usually take care of this. However, sometimes single dependencies can cause problems and have to be installed manually.</p>
-<p>“magrittr”, “tibble”, “dplyr”, “reshape2”, “prefmod”, “gnm”, “ggplot2”, “ggpubr”, “foreach”, “viridis”, “Rmisc”</p>
+<p>“magrittr”, “tibble”, “dplyr”, “reshape2”, “prefmod”, “gnm”, “ggplot2”, “ggpubr”, “foreach”, “viridis”, “ggsci”, Rmisc“,”doRNG"</p>
 <p>The following function can be used to install single packages - or just the missing ones from CRAN.</p>
 <pre class="{r"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("paste missing package name here") </a></code></pre>
 </div>
@@ -163,7 +167,7 @@
 <ul class="list-unstyled">
 <li>Steven Talbot <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-9062-4065" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Dana Pfefferle <br><small class="roles"> Author </small>  </li>
-<li>Lewejohann Lars <br><small class="roles"> Author </small>  </li>
+<li>Lars Lewejohann <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -172,7 +176,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Steven Talbot, Dana Pfefferle, Lewejohann Lars.</p>
+  <p>Developed by Steven Talbot, Dana Pfefferle, Lars Lewejohann.</p>
 </div>
 
 <div class="pkgdown">

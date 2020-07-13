@@ -103,6 +103,7 @@ tie_worth <- function(xdata     = NULL,
   }
 
 
+
   # calculate intransitivity?
   if(intrans==F){
   }else{
@@ -213,7 +214,7 @@ tie_worth <- function(xdata     = NULL,
   if(intrans==F){
     list(dat=dat, res=resNoSide, modelout=hwor_DS1, worth=worth)
   }else{
-    list(dat=dat, res=resNoSide, modelout=hwor_DS1, worth=worth, intrans=itr)
+    list(dat=dat, res=resNoSide, modelout=hwor_DS1, worth=worth, intrans=itr, Ipct=itr/dim(dat)[1]*100)
   }
 
 }

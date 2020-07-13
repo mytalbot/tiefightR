@@ -64,6 +64,9 @@
       <a href="../articles/Examples.html">Examples</a>
     </li>
     <li>
+      <a href="../articles/tiefightR_cutoffs.html">tiefightR Cutoff Definitions</a>
+    </li>
+    <li>
       <a href="../articles/tiefightR_Vignette.html">tiefightR Vignette</a>
     </li>
   </ul>
@@ -92,7 +95,7 @@
       <h1 data-toc-skip>Examples</h1>
                         <h4 class="author">Steven R. Talbot</h4>
             
-            <h4 class="date">2020-06-23</h4>
+            <h4 class="date">2020-07-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mytalbot/tiefightR/blob/master/vignettes/Examples.Rmd"><code>vignettes/Examples.Rmd</code></a></small>
       <div class="hidden name"><code>Examples.Rmd</code></div>
@@ -104,7 +107,7 @@
 <div id="the-tiefightr-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-tiefightr-package" class="anchor"></a>The tiefightR package</h2>
-<p>…offers various functions for the position-assessment of a commodity obtained from a preference test experiment. The analysis of binary data and continous data is possible. However, in case of the latter ties will be introduced in case of equal test results. The package offers solutions (mainly by using randomizations) to conquer this problem. For each data set the intransitivity values are calculated as well. This offers some sort of quality assessment for the analysed data. A user can rank unknown commodities using different combinations of the remaining items in his test list. This vignette will give a basic understanding what can be done with the package. We’ll make use of the three internalized data sets for the purpose of theses examples.</p>
+<p>…offers various functions for the position-assessment of a commodity obtained from a preference test experiment. The analysis of binary data and continuous data is possible. However, in the case of the latter ties will be introduced in case of equal test results. The package offers solutions (mainly by using randomizations) to conquer this problem. For each data set, the intransitivity values are calculated as well. This offers some sort of quality assessment for the analyzed data. A user can rank unknown commodities using different combinations of the remaining items in his test list. This vignette will give a basic understanding of what can be done with the package. We’ll make use of the three internalized data sets for theses examples.</p>
 <div id="use-case-1-human-data-binary-outcome-data---full-set-analysis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-1-human-data-binary-outcome-data---full-set-analysis" class="anchor"></a>Use case 1: human data (binary outcome data) - full set analysis</h3>
@@ -141,7 +144,7 @@
 <div id="use-case-2-human-data-binary-outcome-data---test-individual-items" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-2-human-data-binary-outcome-data---test-individual-items" class="anchor"></a>Use case 2: human data (binary outcome data) - test individual items</h3>
-<p>Let’s say we want to test the position of “Lake”. Then we’ll have to add the varialbe r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example we test against r2=“Cat”. This vector can be expanded with any item from the full list. The <code>tie_worth</code> function will take any combination of “Lake” vs “Cat” and <strong>randomizes</strong> the outcome variable (pref_img1) for the remaining combinations. This way the position of “Lake” will tested agains random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get “fair” estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depend on the data set. However, in the “tiefightR Vignette” a minimum of 50 radnomizations seems reasonable for the mouse data. You’ll notice, that the worth values are different compared to use case 1. The function arguments (SV…RV) are the default settings and have not to be repeated here again.</p>
+<p>Let’s say we want to test the position of “Lake”. Then we’ll have to add the variable r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example, we test against r2=“Cat”. This vector can be expanded with any item from the full list. The <code>tie_worth</code> function will take any combination of “Lake” vs “Cat” and <strong>randomizes</strong> the outcome variable (pref_img1) for the remaining combinations. This way the position of “Lake” will test against random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get “fair” estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depends on the data set. However, in the “tiefightR Vignette” a minimum of 50 randomizations seems reasonable for the mouse data. You’ll notice, that the worth values are different compared to use case 1. The function arguments (SV…RV) are the default settings and have not to be repeated here again.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">
 <span class="no">human_test2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_worth.html">tie_worth</a></span>(<span class="kw">xdata</span> <span class="kw">=</span> <span class="no">raw</span>,
                      <span class="kw">showplot</span>  <span class="kw">=</span> <span class="fl">FALSE</span>,
@@ -152,20 +155,20 @@
                      <span class="kw">r2</span>        <span class="kw">=</span> <span class="st">"Cat"</span>)  <span class="co"># change this / to multiple combis</span>
 <span class="no">human_test2</span>$<span class="no">worth</span>
 <span class="co">#&gt;                 worth</span>
-<span class="co">#&gt; Cat        0.31615063</span>
-<span class="co">#&gt; Crow       0.24284443</span>
-<span class="co">#&gt; Doctor     0.09011763</span>
-<span class="co">#&gt; Frustrated 0.05614853</span>
-<span class="co">#&gt; Lake       0.10524886</span>
-<span class="co">#&gt; War        0.03442327</span>
-<span class="co">#&gt; Fire       0.15506665</span>
+<span class="co">#&gt; Cat        0.31973137</span>
+<span class="co">#&gt; Crow       0.22879579</span>
+<span class="co">#&gt; Doctor     0.09921308</span>
+<span class="co">#&gt; Frustrated 0.05846778</span>
+<span class="co">#&gt; Lake       0.09921308</span>
+<span class="co">#&gt; War        0.03708570</span>
+<span class="co">#&gt; Fire       0.15749319</span>
 <span class="co">#&gt; attr(,"class")</span>
 <span class="co">#&gt; [1] "wmat"   "matrix"</span></pre></body></html></div>
 </div>
 <div id="use-case-3-mouse-data-continous-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-3-mouse-data-continous-data" class="anchor"></a>Use case 3: mouse data (continous data)</h3>
-<p>The problem of position evaluation become more difficult when data are non-binary. This will automatically introduce ties for items with the same continous outcome. In order to work with these data, they’ll have to be binarized (<code>tie_binarize</code>)first and then analysed with the <code>tie_worth</code> function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument comstudy has changed as well since in these data, the names for the subgroups are different. The variables (SV, RF, CF, id and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the “original” data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continous) ties beeing 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.</p>
+<p>The problem of position evaluation becomes more difficult when data are non-binary. This will automatically introduce ties for items with the same continuous outcome. To work with these data, they’ll have to be binarized (<code>tie_binarize</code>)first and then analyzed with the <code>tie_worth</code> function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument “compstudy” has changed as well since, in these data, the names for the subgroups are different. The variables (SV, RF, CF, id, and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the “original” data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continuous) ties being 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Import raw data (exmpl: mouse data)</span>
 <span class="no">raw_mouse</span>  <span class="kw">&lt;-</span> <span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/mouse.html">mouse</a></span>
 
@@ -215,7 +218,7 @@
 <div id="use-case-4-individual-test-scenario-human-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-case-4-individual-test-scenario-human-data" class="anchor"></a>Use case 4: Individual test scenario (human data)</h2>
-<p>Although the function from the prior use cases allow individual testing, the tiefightR package offers a distinct function for testing variable combinations. The resulting table yields the mean intransitivity value plus the 95% confidence interval. This function can be used to test a data set for the number of randomizations needed to adjust for potential ties.</p>
+<p>Although the function from the prior use cases allows individual testing, the tiefightR package offers a distinct function for testing variable combinations. The resulting table yields the mean intransitivity value plus the 95% confidence interval. This function can be used to test a data set for the number of randomizations needed to adjust for potential ties.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Observe the position and mean intransitivity after R randomizations</span>
 <span class="no">raw</span>     <span class="kw">&lt;-</span> <span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/human.html">human</a></span>
 <span class="no">ord</span>     <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Cat"</span>, <span class="st">"Crow"</span>, <span class="st">"Doctor"</span>, <span class="st">"Frustrated"</span>, <span class="st">"Lake"</span>, <span class="st">"War"</span>, <span class="st">"Fire"</span>)
@@ -230,14 +233,14 @@
                     <span class="kw">testme</span>    <span class="kw">=</span> <span class="st">"Lake"</span>,  <span class="co"># Change </span>
                     <span class="kw">against</span>   <span class="kw">=</span> <span class="st">"Cat"</span>)   <span class="co"># Change items and watch intrans move</span>
 <span class="no">mytest</span>
-<span class="co">#&gt;      against worth pos intrans I_sd upr lwr</span>
-<span class="co">#&gt; Lake     Cat 0.129   5      65    0  65  65</span></pre></body></html></div>
+<span class="co">#&gt;      against worth pos intrans Ipct    n I_sd upr lwr</span>
+<span class="co">#&gt; Lake     Cat 0.129   5      65 2.79 2331    0  65  65</span></pre></body></html></div>
 </div>
 <div id="use-case-5-simulation-human-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-case-5-simulation-human-data" class="anchor"></a>Use case 5: Simulation (human data)</h2>
-<p>The above shown use cases are good for single tests when the combination of items is evident. However, in reality the order of items is unclear. Simulation is a good start for ranking an item without knowing too much about the remaining combinations and transitivies. The <code>tie_sim</code> function will test an item against all possible combinations (as shown above) but will, additionally, randomize the results R-times. The resulting mean worth values and mean intransitivity values indicate the quality of the item’s position.</p>
-<p>Standard R will only work on a single thread. Since simulations are computationally intense, the <code>tie_sim</code> function employs parallel computation. You should only perform these calculations if you’re working on a machine with multipe cores (CPUs). The following function will help you determine the number of cores on your machine.</p>
+<p>The above-shown use cases are good for single tests when the combination of items is evident. However, in reality, the order of items is unclear. Simulation is a good start for ranking an item without knowing too much about the remaining combinations and transitivity. The <code>tie_sim</code> function will test an item against all possible combinations (as shown above) but will, additionally, randomize the results R-times. The resulting mean worth values and mean intransitivity values indicate the quality of the item’s position.</p>
+<p>Standard R will only work on a single thread. Since simulations are computationally intense, the <code>tie_sim</code> function employs parallel computation. You should only perform these calculations if you’re working on a machine with multiple cores (CPUs). The following function will help you determine the number of cores on your machine.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co">### Check the number of available CPU cores on your machine.</span>
 <span class="co">### Use k-2 later in the simulation or things could get ugly...</span>
 <span class="co">### Don't do this analysis on a single core machine.</span>
@@ -245,7 +248,8 @@
 <span class="no">k</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_cores.html">tie_cores</a></span>()
 <span class="no">k</span>
 <span class="co">#&gt; [1] 8</span></pre></body></html></div>
-<p>Okay, so now we know that we have 8 Cores on our machine (yours might be different!). We will use 6 in the simulation (just to be sure). This example uses only R=2 randomizations to keep things simple. You should increase this R value appropriately. Again, we test the item “Lake” against all the rest of (64-1) possible combinations in the item list (ord). The simulation result will be analyzed with the <code>tie_simrep</code> function. This will output a Bubbleplot with the calculated positions of the test variable and the achieved worth values. The bubble sizes correspond to the calculated mean intransitivities. In addition, the color codes for the number of variables from the item list that were tested in the respective simulation step. There is also a frequency output table (Ftable) showing the number of times the test variables was positioned in a specific position. If you want to simulate non-binary data, you’ll have to use the <code>tie_binarize</code> function output as input data in the simulation. Remember: the set uses a randomly fixed set of ties (if present)!</p>
+<p>Okay, so now we know that we have 8 Cores on our machine (yours might be different!). We will use 6 in the simulation (just to be sure). This example uses only R=2 randomizations to keep things simple. You should increase this R-value appropriately. Again, we test the item “Lake” against all the rest of (64-1) possible combinations in the item list (ord).</p>
+<p>The simulation result will be analyzed with the <code>tie_simrep</code> function. This will output a Bubbleplot with the calculated positions of the test variable and the achieved worth values. The bubble sizes correspond to the calculated mean intransitivities. Also, the color codes for the number of variables from the item list that were tested in the respective simulation step. There is also a frequency output table (Ftable) showing the number of times the test variables were positioned in a specific position. If you want to simulate non-binary data, you’ll have to use the <code>tie_binarize</code> function output as input data in the simulation. Remember: the set uses a randomly fixed set of ties (if present)!</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tiefightR</span>)
 <span class="co"># load some data for the simulation </span>
 <span class="no">raw</span>         <span class="kw">&lt;-</span> <span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/human.html">human</a></span>
@@ -288,7 +292,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Steven Talbot, Dana Pfefferle, Lewejohann Lars.</p>
+  <p>Developed by Steven Talbot, Dana Pfefferle, Lars Lewejohann.</p>
 </div>
 
 <div class="pkgdown">

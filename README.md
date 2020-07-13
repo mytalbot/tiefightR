@@ -21,7 +21,7 @@ limited, and in classical test settings, usually, only two options are
 presented. Here, we evaluate the option of combining multiple binary
 choices to rank preferences among a larger number of commodities. In the
 case of continuous data, ties are introduced when the same amount of
-commodity (e.g. a fluid) was chosen. The tiefightR package creates a
+commodity (e.g. a fluid) was chosen. The tiefightR package creates a
 ranking system that takes into account the number of ties and
 intransitivities in the data. This will help the user to rank specific
 commodities and evaluate the quality of this ranking. In estimating the

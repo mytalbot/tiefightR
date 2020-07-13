@@ -64,6 +64,9 @@
       <a href="../articles/Examples.html">Examples</a>
     </li>
     <li>
+      <a href="../articles/tiefightR_cutoffs.html">tiefightR Cutoff Definitions</a>
+    </li>
+    <li>
       <a href="../articles/tiefightR_Vignette.html">tiefightR Vignette</a>
     </li>
   </ul>
@@ -92,7 +95,7 @@
       <h1 data-toc-skip>tiefightR Vignette</h1>
                         <h4 class="author">Steven R. Talbot</h4>
             
-            <h4 class="date">2020-06-23</h4>
+            <h4 class="date">2020-07-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mytalbot/tiefightR/blob/master/vignettes/tiefightR_Vignette.Rmd"><code>vignettes/tiefightR_Vignette.Rmd</code></a></small>
       <div class="hidden name"><code>tiefightR_Vignette.Rmd</code></div>
@@ -104,7 +107,7 @@
 <div id="tiefighr-for-preference-testing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiefighr-for-preference-testing" class="anchor"></a>tiefighR for preference testing</h2>
-<p>Preference tests are a valuable tool to measure the “wants” of individuals and have been proven to be a valid method in order to rate different commodities. The number of commodities presented at the same time is, however, limited and in classical test settings usually only two options are presented. In our paper we evaluate the option of combining multiple binary choices in order to rank preferences among a larger number of commodities. The tiefightR package offers the neccessary tools to test selections of commodities and to obtain an estimate of their relative position.</p>
+<p>Preference tests are a valuable tool to measure the “wants” of individuals and have been proven to be a valid method to rate different commodities. The number of commodities presented at the same time is, however, limited and in classical test settings usually, only two options are presented. In our paper, we evaluate the option of combining multiple binary choices to rank preferences among a larger number of commodities. The tiefightR package offers the necessary tools to test selections of commodities and to obtain an estimate of their relative position.</p>
 <div id="dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h3>
@@ -119,7 +122,9 @@
 “ggpubr”<span class="citation">(Kassambara 2020)</span>,<br>
 “foreach”<span class="citation">(Microsoft and Weston 2020)</span>,<br>
 “viridis”<span class="citation">(Garnier 2018)</span>,<br>
-“Rmisc”<span class="citation">(Hope and Hope 2016)</span></p>
+“Rmisc”<span class="citation">(Hope and Hope 2016)</span><br>
+“doRNG”<span class="citation">(Gaujoux 2020)</span><br>
+“ggsci”<span class="citation">(Xiao 2018)</span></p>
 <p>The following function can be used to install single packages - or just the missing ones from CRAN.</p>
 <pre class="{r"><code>install.packages("paste missing package name here ")
 </code></pre>
@@ -128,13 +133,13 @@
 <div id="general-concept-of-the-tiefightr-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#general-concept-of-the-tiefightr-package" class="anchor"></a>General concept of the tiefightR package</h2>
-<p>For data binarization a preference threshold for ties is needed (by default this is 50% for an equal commodity selection Likelihood). In case of ties, the binary response variable is randomized. Therefore, the analysis has to be repeated multiple times for getting more robust estimates of the tested commodities’ position in the data.</p>
-<p>Further, the tiefighteR package offers simulation capabilities. This will help to determine the position of individual items without having to test the whole data set. The simulation will randomly test an item against all remaining combinations. These calculations are combined with an estimate on the intransitivity which acts as a quality sign for the found position. The simulation results can give an indication for similar data and how new commodities can be positioned.</p>
+<p>For data binarization, a preference threshold for the ties is needed (by default this is 50% for an equal commodity selection Likelihood). In the case of ties, the binary response variable is randomized. Therefore, the analysis has to be repeated multiple times for getting more robust estimates of the tested commodities’ position in the data.</p>
+<p>Further, the tiefighteR package offers simulation capabilities. This will help to determine the position of individual items without having to test the whole data set. The simulation will randomly test an item against all remaining combinations. These calculations are combined with an estimate on the intransitivity which acts as a quality sign for the found position. The simulation results can indicate similar data and how new commodities can be positioned.</p>
 </div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>We conducted experiments with rhesus macaques, mice, and humans in order to validate the ranking method across species. These data sets are included in the package and are called <code>human</code>, <code>mouse</code> and <code>rhesus</code>. The response variable for human is binary and for rhesus and mouse it is continous (i.e., the amount of drank liquid). In order to harmonize the analysis, the continous data will have to be binarized.</p>
+<p>We conducted experiments with rhesus macaques, mice, and humans to validate the ranking method across species. These data sets are included in the package and are called <code>human</code>, <code>mouse</code>, and <code>rhesus</code>. The response variable for humans is binary and for rhesus and mouse it is continuous (i.e., the amount of drank liquid). To harmonize the analysis, continuous data will have to be binarized.</p>
 <p>The following example (mouse) shows how the raw (input) data need to be structured. The “pref_img1” is the binary response variable.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/mouse.html">mouse</a></span>)
 <span class="co">#&gt;         date animalID  side fluidType numOF_visits_with_Licks</span>
@@ -161,19 +166,22 @@
 <div id="how-many-tests-are-required" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-many-tests-are-required" class="anchor"></a>How many tests are required?</h2>
-<p>The output of the <code>tie_worth</code> function are worth values that can be ranked for position. When ties are present (or introduced), the worth values will shift. The question is: when can a user be certain that a position is legit when ties are present? In order to stabilise the position in terms of worth values, we use the power of the central tendency shift of the mean. The more often a random test is repeated, the more stable the mean becomes. In order to generalize the different distances we calculate the (Euclidean) distance matrix of the worth values at each randomization step and report the average distance over the number of randomizations. It can be expected that the mean Euclidean distance and the corresponding variance stabilize.</p>
-<p>Consider the following worth plot for binary mouse data. The distance between two data points is simply the difference between worth values. In the distance matrix the distances for all combinations are calculated.</p>
+<p>The output of the <code>tie_worth</code> function is worth values that can be ranked for the position. When ties are present (or introduced), the worth values will shift. The question is: when can a user be certain that a position is legit when ties are present? To stabilize the position in terms of worth values, we use the power of the central tendency shift of the mean. The more often a random test is repeated, the more stable the mean becomes. To generalize the different distances we calculate the (Euclidean) distance matrix of the worth values at each randomization step and report the average distance over the number of randomizations. It can be expected that the mean Euclidean distance and the corresponding variance stabilize.</p>
+<p>Consider the following worth plot for binary mouse data. The distance between two data points is simply the difference between worth values. In the distance matrix, the distances for all combinations are calculated.</p>
 <p><img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-4-1.png" width="60%"></p>
 <p>Of course, this only works when ties are present! Otherwise, there would be nothing to randomize.</p>
-<p><img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-5-1.png" width="45%"><img src="tiefightR_Vignette_files/figure-html/unnamed-chunk-5-2.png" width="45%"></p>
-<p>The plots show that the overall change in Euclidean distances is small. The largest step occurs within the first 50 to 75 randomization steps. The corresponding SD of the distances corroborates this. Empirically, for these mouse data, at least 50 randomizations are required to obtain stable mean positions with the tested commodities.</p>
+<div id="how-to-determine-an-opitmal-cutoff" class="section level3">
+<h3 class="hasAnchor">
+<a href="#how-to-determine-an-opitmal-cutoff" class="anchor"></a>How to determine an opitmal cutoff?</h3>
+<p>The largest change in Euclidean distance occurs within the first randomization steps. The corresponding uncertainty of the distances corroborates this (95% CIs). The package contains two specific functions (<code>tie_cicheck</code> and <code>tie_cutoff</code>) that can be used for thresholding. The <a href="https://talbotsr.com/tiefightR/articles/tiefightR_cutoffs.html"><code>tiefightR_cutoffs</code></a> Vignette shows an example of how a reasonable cutoff for a discrete number of randomizations can be achieved for a specific set of data.</p>
+</div>
 </div>
 <div id="testing-single-commodities" class="section level2">
 <h2 class="hasAnchor">
 <a href="#testing-single-commodities" class="anchor"></a>Testing single commodities</h2>
-<p>With this knowledge, individual items from the commodity list can be tested. The tie_test function was specifically designed to test individual combinations. For example, if the position of the NaCl item is to be tested (e.g., at 50 randomizations), the user combines this with any other item combination from the list. As a further criterion (and sign of good quality), the intransitivity is computed as well. The user can add more items to the tested “against” list for getting more confidence in the positioning of the tested item (hopefully, with lower intransitivity).</p>
-<pre><code>#&gt;      against worth pos intrans I_sd  upr   lwr
-#&gt; NaCl     HCl  0.19   2   35.33 2.08 40.5 30.16</code></pre>
+<p>With this knowledge, individual items from the commodity list can be tested. The tie_test function was specifically designed to test individual combinations. For example, if the position of the NaCl item is to be tested (e.g., at 50 randomizations), the user combines this with any other item combination from the list. As a further criterion (and a sign of good quality), the intransitivity is computed as well. The user can add more items to the tested “against” list for getting more confidence in the positioning of the tested item (hopefully, with lower intransitivity).</p>
+<pre><code>#&gt;      against worth pos intrans Ipct   n I_sd  upr   lwr
+#&gt; NaCl     HCl  0.19   2   35.33 8.03 440 2.08 40.5 30.16</code></pre>
 <p>NaCl is positioned on position 2 (which is the truth, with HCl in position 1). Adding more items can lower the intransitivity (but depends on the individual intransitivities in the data set).</p>
 </div>
 <div id="references" class="section level2 unnumbered">
@@ -185,6 +193,9 @@
 </div>
 <div id="ref-viridiscite">
 <p>Garnier, Simon. 2018. <em>Viridis: Default Color Maps from ’Matplotlib’</em>. <a href="https://CRAN.R-project.org/package=viridis" class="uri">https://CRAN.R-project.org/package=viridis</a>.</p>
+</div>
+<div id="ref-doRNGcite">
+<p>Gaujoux, Renaud. 2020. <em>DoRNG: Generic Reproducible Parallel Backend for ’Foreach’ Loops</em>. <a href="https://CRAN.R-project.org/package=doRNG" class="uri">https://CRAN.R-project.org/package=doRNG</a>.</p>
 </div>
 <div id="ref-prefmodcit">
 <p>Hatzinger, Reinhold, and Regina Dittrich. 2012. “prefmod: An R Package for Modeling Preferences Based on Paired Comparisons, Rankings, or Ratings.” <em>Journal of Statistical Software</em> 48 (10): 1–31. <a href="http://www.jstatsoft.org/v48/i10/" class="uri">http://www.jstatsoft.org/v48/i10/</a>.</p>
@@ -213,6 +224,9 @@
 <div id="ref-dplyrcite">
 <p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>.</p>
 </div>
+<div id="ref-ggscicite">
+<p>Xiao, Nan. 2018. <em>Ggsci: Scientific Journal and Sci-Fi Themed Color Palettes for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggsci" class="uri">https://CRAN.R-project.org/package=ggsci</a>.</p>
+</div>
 </div>
 </div>
   </div>
@@ -228,7 +242,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Steven Talbot, Dana Pfefferle, Lewejohann Lars.</p>
+  <p>Developed by Steven Talbot, Dana Pfefferle, Lars Lewejohann.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tiefightR - rhesus data — rhesus • tiefightR</title>
+<title>Cutoff determination for increasing number of randomizations — tie_cutoff • tiefightR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,17 +46,13 @@
 
 
 
-<meta property="og:title" content="tiefightR - rhesus data — rhesus" />
-<meta property="og:description" content="Six male rhesus macaques (Macaca mulatta) at an age range of 6-19 years (mean = 13.09) living in same-sexual groups
-of 2 - 4 at the Cognitive Neuroscience Laboratory, German Primate Centre, took part in this study. Monkeys were housed
-in indoor rooms equipped with a multitude of toys and wooden structures as well as natural and artificial light.
-The space per monkey exceeded all applicable German and European regulations (Berger et al. 2018). Indoor rooms were
-temperature-controlled and connected by a tunnel with rooms at ambient outdoor temperature and lighting, but protected
-from precipitation. On test days, monkeys had free access to water for at least 4 hours
-(typically much more: for definitions of access to water see (Pfefferle et al. 2018)) and received monkey chow ad libitum.
-On non-test days, the monkeys had free access to water and received monkey chow ad libitum,
-supplemented with dried fruits, fresh fruits and vegetables. The health of the monkeys was monitored daily by the
-animal care staff, veterinarians, and the laboratory researchers who were all highly experienced with these animals." />
+<meta property="og:title" content="Cutoff determination for increasing number of randomizations — tie_cutoff" />
+<meta property="og:description" content="The tie_cutoff function calculates the mean Euclidean distance between commodity worth values. This becomes
+relevant when ties are present in the data. Depending on how ties are resolved (see prefLimit argument in the function),
+the items' position will change a lot. Since their relative positions are a function of the number of ties, more
+randomizations will stabilize their means and thus commodity positions. Increasing the number of randomizations usually leads
+not only to a stabilized mean but also to smaller confidence intervals. By defining a relative cutoff (e.g., 5 or 10%) for the
+range of the CIs regarding the maximum range in the data, a cutoff for the number of randomizations can be found." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -143,47 +139,111 @@ animal care staff, veterinarians, and the laboratory researchers who were all hi
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tiefightR - rhesus data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mytalbot/tiefightR/blob/master/R/rhesus.R'><code>R/rhesus.R</code></a></small>
-    <div class="hidden name"><code>rhesus.Rd</code></div>
+    <h1>Cutoff determination for increasing number of randomizations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mytalbot/tiefightR/blob/master/R/tie_cutoff.R'><code>R/tie_cutoff.R</code></a></small>
+    <div class="hidden name"><code>tie_cutoff.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Six male rhesus macaques (Macaca mulatta) at an age range of 6-19 years (mean = 13.09) living in same-sexual groups
-of 2 - 4 at the Cognitive Neuroscience Laboratory, German Primate Centre, took part in this study. Monkeys were housed
-in indoor rooms equipped with a multitude of toys and wooden structures as well as natural and artificial light.
-The space per monkey exceeded all applicable German and European regulations (Berger et al. 2018). Indoor rooms were
-temperature-controlled and connected by a tunnel with rooms at ambient outdoor temperature and lighting, but protected
-from precipitation. On test days, monkeys had free access to water for at least 4 hours
-(typically much more: for definitions of access to water see (Pfefferle et al. 2018)) and received monkey chow ad libitum.
-On non-test days, the monkeys had free access to water and received monkey chow ad libitum,
-supplemented with dried fruits, fresh fruits and vegetables. The health of the monkeys was monitored daily by the
-animal care staff, veterinarians, and the laboratory researchers who were all highly experienced with these animals.</p>
+    <p>The <code>tie_cutoff</code> function calculates the mean Euclidean distance between commodity worth values. This becomes
+relevant when ties are present in the data. Depending on how ties are resolved (see prefLimit argument in the function),
+the items' position will change a lot. Since their relative positions are a function of the number of ties, more
+randomizations will stabilize their means and thus commodity positions. Increasing the number of randomizations usually leads
+not only to a stabilized mean but also to smaller confidence intervals. By defining a relative cutoff (e.g., 5 or 10%) for the
+range of the CIs regarding the maximum range in the data, a cutoff for the number of randomizations can be found.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>rhesus</span>)</pre>
+    <pre class="usage"><span class='fu'>tie_cutoff</span>(
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>tiefightR</span><span class='kw ns'>::</span><span class='no'><a href='mouse.html'>mouse</a></span>,
+  <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>50</span>,
+  <span class='kw'>ciLvl</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>cpus</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>SV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>RF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>CF</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>RV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>prefLimit</span> <span class='kw'>=</span> <span class='fl'>50</span>,
+  <span class='kw'>compstudy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>showplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>showCutoff</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>R</th>
+      <td><p>number of maximum randomization steps</p></td>
+    </tr>
+    <tr>
+      <th>cpus</th>
+      <td><p>No. of used local CPUs for parallel computing (you should have more than 2)</p></td>
+    </tr>
+    <tr>
+      <th>SV</th>
+      <td><p>name of the side variable</p></td>
+    </tr>
+    <tr>
+      <th>RF</th>
+      <td><p>name of the reference fluid variable</p></td>
+    </tr>
+    <tr>
+      <th>CF</th>
+      <td><p>name of the combination fluid variable</p></td>
+    </tr>
+    <tr>
+      <th>id</th>
+      <td><p>subject IDs</p></td>
+    </tr>
+    <tr>
+      <th>RV</th>
+      <td><p>name of the response variable</p></td>
+    </tr>
+    <tr>
+      <th>ord</th>
+      <td><p>item category order</p></td>
+    </tr>
+    <tr>
+      <th>prefLimit</th>
+      <td><p>preference limit for binarization threshold</p></td>
+    </tr>
+    <tr>
+      <th>compstudy</th>
+      <td><p>label of the compiled sub study (used for filtering)</p></td>
+    </tr>
+    <tr>
+      <th>default</th>
+      <td><p>default item in worth value estimation (usually the lowest worth value)</p></td>
+    </tr>
+    <tr>
+      <th>showplot</th>
+      <td><p>show the plot for randomization cutoff determination</p></td>
+    </tr>
+    <tr>
+      <th>showCutoff</th>
+      <td><p>show vertical line of the cutoff</p></td>
+    </tr>
+    <tr>
+      <th>dat</th>
+      <td><p>imported raw data (should be binary, if not, will be binarized automatically)</p></td>
+    </tr>
+    <tr>
+      <th>cutoff</th>
+      <td><p>Percent cutoff level (default: 0.05) - means CI range &lt; than cutoff value</p></td>
+    </tr>
+    <tr>
+      <th>standardize</th>
+      <td><p>standardize on the maximum CI value?</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A 240 x 7 data frame with continouse response data (amountDrank).</p>
+    <p>Exports cutoff value and plots</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>rhesus</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>rhesus</span>)</div><div class='output co'>#&gt;         date test_no animalID  side fluidType amountDrank totalDrank
-#&gt; 1 21.11.2018       1     Iggy  left    banana         365        385
-#&gt; 2 21.11.2018       1     Iggy right      NaCl          20        385
-#&gt; 3 21.11.2018       1    Joshi  left     water          20        310
-#&gt; 4 21.11.2018       1    Joshi right     grape         290        310
-#&gt; 5 22.11.2018       1     Iggy  left     water          70        470
-#&gt; 6 22.11.2018       1     Iggy right    banana         400        470
-#&gt;   combinationWith
-#&gt; 1            NaCl
-#&gt; 2          banana
-#&gt; 3           grape
-#&gt; 4           water
-#&gt; 5          banana
-#&gt; 6           water</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
