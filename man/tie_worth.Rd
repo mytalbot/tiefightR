@@ -7,7 +7,6 @@
 tie_worth(
   xdata = NULL,
   esti = "worth",
-  SV = "side_img1",
   RF = "img1",
   CF = "img2",
   id = "ID",
@@ -27,8 +26,6 @@ tie_worth(
 \item{xdata}{imported (binarized) data frame}
 
 \item{esti}{worth estimator (default, "worth", alt: "estimator")}
-
-\item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
 

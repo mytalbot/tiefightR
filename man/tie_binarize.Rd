@@ -6,7 +6,6 @@
 \usage{
 tie_binarize(
   xdata = NULL,
-  SV = NULL,
   RF = NULL,
   CF = NULL,
   id = NULL,
@@ -15,7 +14,6 @@ tie_binarize(
   compiled_studies = NULL,
   setseed = TRUE,
   prefLimit = 50,
-  sidevar = "side",
   refval = "refValue",
   oval = "otherValue",
   aid = "animalID",
@@ -24,8 +22,6 @@ tie_binarize(
 }
 \arguments{
 \item{xdata}{imported (binarized) data frame}
-
-\item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
 
@@ -42,8 +38,6 @@ tie_binarize(
 \item{setseed}{TRUE/FALSE for seeding}
 
 \item{prefLimit}{preference limit for binarization threshold}
-
-\item{sidevar}{the name of the standardized side variable in the org data}
 
 \item{refval}{the name of the standardized reference variable in the org data}
 

@@ -66,7 +66,6 @@ head(tiefightR::mouse)
 The column names in different data sets can be different. Therefore, the functions have fields that need specification. The following names should be adjusted when they are different (e.g. in the `tie_worth` function).
 
 ```{r echo=TRUE}
- SV        = "side"                     # name of the side variable (default = "side_img1")
  RF        = "fluidType"                # name of the reference fluid variable (default = "img1")
  CF        = "combinationWith"          # name of the combination fluid variable (default = "img2")
  id        = "animalID"                 # subject IDs (default = "ID")
@@ -86,7 +85,6 @@ library(tiefightR)
 raw        <- tiefightR::mouse
 set.seed(123)
 bin_mouse  <- tie_binarize(xdata      = tiefightR::mouse,
-                           SV         = "side",
                            RF         = "fluidType",
                            CF         = "combinationWith",
                            id         = "animalID",
@@ -96,7 +94,6 @@ bin_mouse  <- tie_binarize(xdata      = tiefightR::mouse,
                            prefLimit  = 50)
 
 mouse1      <- tie_worth(xdata         = bin_mouse,
-                        SV            = "side_img1",
                         RF            = "img1",
                         CF            = "img2",
                         id            = "ID",
@@ -126,7 +123,6 @@ library(tiefightR)
 raw        <- tiefightR::mouse
 set.seed(123)
 bin_mouse  <- tie_binarize(xdata      = tiefightR::mouse,
-                           SV         = "side",
                            RF         = "fluidType",
                            CF         = "combinationWith",
                            id         = "animalID",

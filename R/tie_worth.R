@@ -6,7 +6,6 @@
 #'
 #' @param xdata imported (binarized) data frame
 #' @param esti worth estimator (default, "worth", alt: "estimator")
-#' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
@@ -37,7 +36,6 @@
 #'
 tie_worth <- function(xdata     = NULL,
                       esti      = "worth",
-                      SV        = "side_img1",
                       RF        = "img1",
                       CF        = "img2",
                       id        = "ID",
@@ -112,7 +110,7 @@ tie_worth <- function(xdata     = NULL,
 
 
   # continue analysis
-  colnames(xdata)[colnames(xdata)==SV] <- "side"        #the name of your side variable
+ # colnames(xdata)[colnames(xdata)==SV] <- "side"        #the name of your side variable
   colnames(xdata)[colnames(xdata)==RF] <- "refValue"    #the name of your reference fluid variable
   colnames(xdata)[colnames(xdata)==CF] <- "otherValue"  #the name of your combination fluid variable
   colnames(xdata)[colnames(xdata)==id] <- "animalID"    #the name of your subject IDs variable
@@ -154,7 +152,7 @@ tie_worth <- function(xdata     = NULL,
                                  pairings[i], dat$concat_test_name)
   }
 
-  tbl <- table(dat$concat_test_name,dat$side) #to check if everything is correctly assigned
+  #tbl <- table(dat$concat_test_name,dat$side) #to check if everything is correctly assigned
 
 
   ##################################################################################################
@@ -183,9 +181,12 @@ tie_worth <- function(xdata     = NULL,
   dat$Trial            <- rep(1:table(dat$concat_test_name)[1], choose(len_ord, 2))
 
   #for creating a trial number that is grouped by category and side
+  #dat                  <- dat %>%
+  #  group_by(concat_test_name,side) %>%
+  #  mutate(Trial_withSide = 1:n())
+
   dat                  <- dat %>%
-    group_by(concat_test_name,side) %>%
-    mutate(Trial_withSide = 1:n())
+    group_by(concat_test_name)
 
   ### run model
   excl_ord             <- ordn[!ordn==default]

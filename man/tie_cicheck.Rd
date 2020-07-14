@@ -9,7 +9,6 @@ tie_cicheck(
   R = NULL,
   ciLvl = 0.95,
   seed = TRUE,
-  SV = NULL,
   RF = NULL,
   CF = NULL,
   id = NULL,
@@ -29,8 +28,6 @@ tie_cicheck(
 \item{ciLvl}{Level of confidence (default: 0.95)}
 
 \item{seed}{TRUE/FALSE for constant seeding}
-
-\item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
 

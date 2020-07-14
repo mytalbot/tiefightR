@@ -5,7 +5,6 @@
 #'
 #' @param R number of maximum randomization steps
 #' @param dat imported raw data (should be binary, if not, will be binarized automatically)
-#' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
@@ -29,7 +28,7 @@
 #'
 #' @export
 
-  tie_cicheck <- function(data=tiefightR::mouse, R=NULL, ciLvl=0.95, seed=TRUE, SV=NULL, RF=NULL,
+  tie_cicheck <- function(data=tiefightR::mouse, R=NULL, ciLvl=0.95, seed=TRUE, RF=NULL,
                           CF=NULL,id=NULL, RV=NULL, ord=NULL, prefLimit=50, compstudy=NULL, default=NULL,
                           showplot=TRUE, showstats=FALSE, ylim=c(0.1,0.35)){
 
@@ -40,7 +39,6 @@
 
     h     <- NULL
     h     <- replicate(R, tie_rwalk(dat        = data,
-                                    SV         = SV,
                                     RF         = RF,
                                     CF         = CF,
                                     id         = id,

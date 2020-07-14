@@ -10,7 +10,6 @@
 #' @param R number of maximum randomization steps
 #' @param dat imported raw data (should be binary, if not, will be binarized automatically)
 #' @param cpus No. of used local CPUs for parallel computing (you should have more than 2)
-#' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
@@ -41,7 +40,7 @@
 #' @export
 #'
 #'
-tie_cutoff <- function(data=tiefightR::mouse, R=50, ciLvl= 0.95, cutoff=0.1, cpus=2, SV=NULL, RF=NULL,
+tie_cutoff <- function(data=tiefightR::mouse, R=50, ciLvl= 0.95, cutoff=0.1, cpus=2, RF=NULL,
                        CF=NULL,id=NULL, RV=NULL, ord=NULL, prefLimit=50, compstudy=NULL,
                        default=NULL, showplot=FALSE, showCutoff=FALSE){
 
@@ -58,7 +57,6 @@ tie_cutoff <- function(data=tiefightR::mouse, R=50, ciLvl= 0.95, cutoff=0.1, cpu
 
                       h     <- NULL
                       h     <- replicate(i, tie_rwalk(dat        = data,
-                                                      SV         = SV,
                                                       RF         = RF,
                                                       CF         = CF,
                                                       id         = id,

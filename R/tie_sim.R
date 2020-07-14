@@ -5,7 +5,6 @@
 #' Good transitiviy and massed localization in a position will improve the Likelihood of a good fit for the item.
 #'
 #' @param xdata imported (binarized) data frame
-#' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
@@ -34,7 +33,6 @@
 
 tie_sim <- function(xdata     = NULL,
                     R         = 2,
-                    SV        = "side_img1",
                     RF        = "img1",
                     CF        = "img2",
                     id        = "ID",
@@ -65,7 +63,6 @@ tie_sim <- function(xdata     = NULL,
                       h   <- NULL
                       h   <- replicate(R,
                                        tie_worth(xdata     = xdata,
-                                                 SV        = SV,
                                                  RF        = RF,
                                                  CF        = CF,
                                                  id        = id,

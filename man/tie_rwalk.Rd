@@ -6,7 +6,6 @@
 \usage{
 tie_rwalk(
   dat = NULL,
-  SV = NULL,
   RF = NULL,
   CF = NULL,
   id = NULL,
@@ -21,8 +20,6 @@ tie_rwalk(
 }
 \arguments{
 \item{dat}{imported (binarized) data frame}
-
-\item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
 

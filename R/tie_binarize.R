@@ -3,7 +3,6 @@
 #' Uses \code{tie_import} non-binary outcome data as input. The outcome variable is randomized for ties in the continous data.
 #'
 #' @param xdata imported (binarized) data frame
-#' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
@@ -12,7 +11,6 @@
 #' @param setseed TRUE/FALSE for seeding
 #' @param prefLimit preference limit for binarization threshold
 #' @param datalabel universal study label for the binarized data
-#' @param sidevar the name of the standardized side variable in the org data
 #' @param refval the name of the standardized reference variable in the org data
 #' @param oval the name of the standardized combination variable in the org data
 #' @param aid  the name of the standardized animal id column in the org data
@@ -28,7 +26,6 @@
 #'
 
 tie_binarize <- function(xdata      = NULL,
-                         SV         = NULL,
                          RF         = NULL,
                          CF         = NULL,
                          id         = NULL,
@@ -37,13 +34,11 @@ tie_binarize <- function(xdata      = NULL,
                          compiled_studies	 = NULL,
                          setseed    = TRUE,
                          prefLimit  = 50,
-                         sidevar    = "side",
                          refval     = "refValue",
                          oval       = "otherValue",
                          aid        = "animalID",
                          fldrnk     = "fluid_drunk"){
 
-  colnames(xdata)[colnames(xdata)==SV] <- sidevar             #the name of your side variable
   colnames(xdata)[colnames(xdata)==RF] <- refval              #the name of your reference fluid variable
   colnames(xdata)[colnames(xdata)==CF] <- oval                #the name of your combination fluid variable
   colnames(xdata)[colnames(xdata)==id] <- aid                 #the name of your subject IDs variable

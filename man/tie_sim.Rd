@@ -7,7 +7,6 @@
 tie_sim(
   xdata = NULL,
   R = 2,
-  SV = "side_img1",
   RF = "img1",
   CF = "img2",
   id = "ID",
@@ -24,8 +23,6 @@ tie_sim(
 \item{xdata}{imported (binarized) data frame}
 
 \item{R}{No. of randomization steps}
-
-\item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
 

@@ -95,7 +95,7 @@
       <h1 data-toc-skip>Examples</h1>
                         <h4 class="author">Steven R. Talbot</h4>
             
-            <h4 class="date">2020-07-13</h4>
+            <h4 class="date">2020-07-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mytalbot/tiefightR/blob/master/vignettes/Examples.Rmd"><code>vignettes/Examples.Rmd</code></a></small>
       <div class="hidden name"><code>Examples.Rmd</code></div>
@@ -115,7 +115,6 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tiefightR</span>)
 <span class="no">raw</span>       <span class="kw">&lt;-</span> <span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/human.html">human</a></span>
 <span class="no">humantest</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_worth.html">tie_worth</a></span>(<span class="kw">xdata</span>   <span class="kw">=</span> <span class="no">raw</span>,
-                     <span class="kw">SV</span>        <span class="kw">=</span> <span class="st">"side_img1"</span>, <span class="co"># specify the column names for the data</span>
                      <span class="kw">RF</span>        <span class="kw">=</span> <span class="st">"img1"</span>,      <span class="co"># specify!</span>
                      <span class="kw">CF</span>        <span class="kw">=</span> <span class="st">"img2"</span>,      <span class="co"># specify!</span>
                      <span class="kw">id</span>        <span class="kw">=</span> <span class="st">"ID"</span>,        <span class="co"># specify!</span>
@@ -144,7 +143,7 @@
 <div id="use-case-2-human-data-binary-outcome-data---test-individual-items" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-2-human-data-binary-outcome-data---test-individual-items" class="anchor"></a>Use case 2: human data (binary outcome data) - test individual items</h3>
-<p>Let’s say we want to test the position of “Lake”. Then we’ll have to add the variable r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example, we test against r2=“Cat”. This vector can be expanded with any item from the full list. The <code>tie_worth</code> function will take any combination of “Lake” vs “Cat” and <strong>randomizes</strong> the outcome variable (pref_img1) for the remaining combinations. This way the position of “Lake” will test against random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get “fair” estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depends on the data set. However, in the “tiefightR Vignette” a minimum of 50 randomizations seems reasonable for the mouse data. You’ll notice, that the worth values are different compared to use case 1. The function arguments (SV…RV) are the default settings and have not to be repeated here again.</p>
+<p>Let’s say we want to test the position of “Lake”. Then we’ll have to add the variable r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example, we test against r2=“Cat”. This vector can be expanded with any item from the full list. The <code>tie_worth</code> function will take any combination of “Lake” vs “Cat” and <strong>randomizes</strong> the outcome variable (pref_img1) for the remaining combinations. This way the position of “Lake” will test against random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get “fair” estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depends on the data set. However, in the “tiefightR Vignette” a minimum of 50 randomizations seems reasonable for the mouse data. You’ll notice, that the worth values are different compared to use case 1. The function arguments (RF…RV) are the default settings and have not to be repeated here again.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">
 <span class="no">human_test2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_worth.html">tie_worth</a></span>(<span class="kw">xdata</span> <span class="kw">=</span> <span class="no">raw</span>,
                      <span class="kw">showplot</span>  <span class="kw">=</span> <span class="fl">FALSE</span>,
@@ -155,20 +154,20 @@
                      <span class="kw">r2</span>        <span class="kw">=</span> <span class="st">"Cat"</span>)  <span class="co"># change this / to multiple combis</span>
 <span class="no">human_test2</span>$<span class="no">worth</span>
 <span class="co">#&gt;                 worth</span>
-<span class="co">#&gt; Cat        0.32241472</span>
-<span class="co">#&gt; Crow       0.20696492</span>
-<span class="co">#&gt; Doctor     0.09485516</span>
-<span class="co">#&gt; Frustrated 0.05932780</span>
-<span class="co">#&gt; Lake       0.11275886</span>
-<span class="co">#&gt; War        0.03831861</span>
-<span class="co">#&gt; Fire       0.16535993</span>
+<span class="co">#&gt; Cat        0.31856288</span>
+<span class="co">#&gt; Crow       0.21959810</span>
+<span class="co">#&gt; Doctor     0.08611260</span>
+<span class="co">#&gt; Frustrated 0.06016799</span>
+<span class="co">#&gt; Lake       0.10443776</span>
+<span class="co">#&gt; War        0.03554581</span>
+<span class="co">#&gt; Fire       0.17557485</span>
 <span class="co">#&gt; attr(,"class")</span>
 <span class="co">#&gt; [1] "wmat"   "matrix"</span></pre></body></html></div>
 </div>
 <div id="use-case-3-mouse-data-continous-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-3-mouse-data-continous-data" class="anchor"></a>Use case 3: mouse data (continous data)</h3>
-<p>The problem of position evaluation becomes more difficult when data are non-binary. This will automatically introduce ties for items with the same continuous outcome. To work with these data, they’ll have to be binarized (<code>tie_binarize</code>)first and then analyzed with the <code>tie_worth</code> function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument “compstudy” has changed as well since, in these data, the names for the subgroups are different. The variables (SV, RF, CF, id, and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the “original” data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continuous) ties being 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.</p>
+<p>The problem of position evaluation becomes more difficult when data are non-binary. This will automatically introduce ties for items with the same continuous outcome. To work with these data, they’ll have to be binarized (<code>tie_binarize</code>)first and then analyzed with the <code>tie_worth</code> function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument “compstudy” has changed as well since, in these data, the names for the subgroups are different. The variables (RF, CF, id, and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the “original” data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continuous) ties being 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Import raw data (exmpl: mouse data)</span>
 <span class="no">raw_mouse</span>  <span class="kw">&lt;-</span> <span class="kw pkg">tiefightR</span><span class="kw ns">::</span><span class="no"><a href="../reference/mouse.html">mouse</a></span>
 
@@ -176,7 +175,6 @@
 <span class="co"># NOTE: the binarized set is calculated with a constant seeding.</span>
 <span class="co"># You can change this w/ setseed = FALSE!</span>
 <span class="no">bin_mouse</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_binarize.html">tie_binarize</a></span>(<span class="kw">xdata</span>      <span class="kw">=</span> <span class="no">raw_mouse</span>,
-                           <span class="kw">SV</span>         <span class="kw">=</span> <span class="st">"side"</span>,
                            <span class="kw">RF</span>         <span class="kw">=</span> <span class="st">"fluidType"</span>,
                            <span class="kw">CF</span>         <span class="kw">=</span> <span class="st">"combinationWith"</span>,
                            <span class="kw">id</span>         <span class="kw">=</span> <span class="st">"animalID"</span>,
@@ -187,7 +185,6 @@
 
 <span class="co"># calculate worth values w/ the binarized data</span>
 <span class="no">mouse1</span>      <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_worth.html">tie_worth</a></span>(<span class="kw">xdata</span>         <span class="kw">=</span> <span class="no">bin_mouse</span>,
-                        <span class="kw">SV</span>            <span class="kw">=</span> <span class="st">"side_img1"</span>,
                         <span class="kw">RF</span>            <span class="kw">=</span> <span class="st">"img1"</span>,
                         <span class="kw">CF</span>            <span class="kw">=</span> <span class="st">"img2"</span>,
                         <span class="kw">id</span>            <span class="kw">=</span> <span class="st">"ID"</span>,
@@ -261,7 +258,6 @@
 <span class="no">sim_humans</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tie_sim.html">tie_sim</a></span>(<span class="kw">xdata</span>     <span class="kw">=</span> <span class="no">raw</span>,
                        <span class="kw">R</span>         <span class="kw">=</span> <span class="fl">2</span>,           <span class="co"># No. of randomizations (here=3 to keep things easy)</span>
                        <span class="kw">cpus</span>      <span class="kw">=</span> <span class="fl">6</span>,           <span class="co"># enter the no- of CPUs</span>
-                       <span class="kw">SV</span>        <span class="kw">=</span> <span class="st">"side_img1"</span>,
                        <span class="kw">RF</span>        <span class="kw">=</span> <span class="st">"img1"</span>,
                        <span class="kw">CF</span>        <span class="kw">=</span> <span class="st">"img2"</span>,
                        <span class="kw">id</span>        <span class="kw">=</span> <span class="st">"ID"</span>,
@@ -276,8 +272,8 @@
 <span class="fu"><a href="../reference/tie_simrep.html">tie_simrep</a></span>(<span class="kw">res</span>  <span class="kw">=</span> <span class="no">sim_humans</span>, <span class="kw">v1</span>   <span class="kw">=</span> <span class="no">testme</span>)</pre></body></html></div>
 <p><img src="Examples_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
 <pre><code>#&gt; 
-#&gt;  3  5  6  7 
-#&gt;  1 18 37  7</code></pre>
+#&gt;  5  6  7 
+#&gt; 22 33  8</code></pre>
 </div>
   </div>
 

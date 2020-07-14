@@ -10,7 +10,6 @@ tie_cutoff(
   ciLvl = 0.95,
   cutoff = 0.1,
   cpus = 2,
-  SV = NULL,
   RF = NULL,
   CF = NULL,
   id = NULL,
@@ -29,8 +28,6 @@ tie_cutoff(
 \item{cutoff}{Percent cutoff level (default: 0.10) - means CI range < than cutoff value}
 
 \item{cpus}{No. of used local CPUs for parallel computing (you should have more than 2)}
-
-\item{SV}{name of the side variable}
 
 \item{RF}{name of the reference fluid variable}
 

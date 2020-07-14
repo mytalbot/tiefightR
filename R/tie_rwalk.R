@@ -3,7 +3,6 @@
 #' The \code{tie_rwalk} function prepares binary and continuous data for tiefightR analysis.
 #'
 #' @param dat imported (binarized) data frame
-#' @param SV name of the side variable
 #' @param RF name of the reference fluid variable
 #' @param CF name of the combination fluid variable
 #' @param id subject IDs
@@ -23,7 +22,6 @@
 #' @export
 
 tie_rwalk  <- function(dat        = NULL,
-                       SV         = NULL,
                        RF         = NULL,
                        CF         = NULL,
                        id         = NULL,
@@ -41,7 +39,6 @@ tie_rwalk  <- function(dat        = NULL,
   # binarize data automatically, if continous
   if ( (all(responseV %in% 0:1))==FALSE ) {
     bin_mouse  <- tie_binarize(xdata  = dat,
-                               SV   = SV,
                                RF   = RF,
                                CF   = CF,
                                id   = id,

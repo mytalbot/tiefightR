@@ -29,7 +29,6 @@ The response variable (RV) is binary. The items in the commodity list are ("Cat"
 library(tiefightR)
 raw       <- tiefightR::human
 humantest <- tie_worth(xdata   = raw,
-                     SV        = "side_img1", # specify the column names for the data
                      RF        = "img1",      # specify!
                      CF        = "img2",      # specify!
                      id        = "ID",        # specify!
@@ -47,7 +46,7 @@ humantest$intrans
 
 ### Use case 2: human data (binary outcome data) - test individual items
 
-Let's say we want to test the position of "Lake". Then we'll have to add the variable r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example, we test against r2="Cat". This vector can be expanded with any item from the full list. The `tie_worth` function will take any combination of "Lake" vs "Cat" and **randomizes** the outcome variable (pref_img1) for the remaining combinations. This way the position of "Lake" will test against random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get "fair" estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depends on the data set. However, in the "tiefightR Vignette" a minimum of 50 randomizations seems reasonable for the mouse data. You'll notice, that the worth values are different compared to use case 1. The function arguments (SV...RV) are the default settings and have not to be repeated here again.
+Let's say we want to test the position of "Lake". Then we'll have to add the variable r1 (this one gets tested) and specify in r2 to which items it shall be tested. In this example, we test against r2="Cat". This vector can be expanded with any item from the full list. The `tie_worth` function will take any combination of "Lake" vs "Cat" and **randomizes** the outcome variable (pref_img1) for the remaining combinations. This way the position of "Lake" will test against random positing allowing to assess its position context. Therefore, repeating this function will change the results a bit every time. To get "fair" estimates of the worth values, these randomizations should be repeated (many times). The number of randomizations (R) depends on the data set. However, in the "tiefightR Vignette" a minimum of 50 randomizations seems reasonable for the mouse data. You'll notice, that the worth values are different compared to use case 1. The function arguments (RF...RV) are the default settings and have not to be repeated here again.
 
 ```{r, fig.height=4, fig.width=4}
 
@@ -64,7 +63,7 @@ human_test2$worth
 
 ### Use case 3: mouse data (continous data)
 
-The problem of position evaluation becomes more difficult when data are non-binary. This will automatically introduce ties for items with the same continuous outcome. To work with these data, they'll have to be binarized (`tie_binarize`)first and then analyzed with the `tie_worth` function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument “compstudy” has changed as well since, in these data, the names for the subgroups are different. The variables (SV, RF, CF, id, and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the "original" data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continuous) ties being 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.
+The problem of position evaluation becomes more difficult when data are non-binary. This will automatically introduce ties for items with the same continuous outcome. To work with these data, they'll have to be binarized (`tie_binarize`)first and then analyzed with the `tie_worth` function. The arguments r1 and r2 can be used for testing individual items as shown in use case 2. Note, that the argument “compstudy” has changed as well since, in these data, the names for the subgroups are different. The variables (RF, CF, id, and RV) have changed as well. By setting the setseed argument to TRUE the data are binarized with a fixed seeding. This will be the "original" data set for reproducible results. There is also a new argument (prefLimit) that will define the threshold for (continuous) ties being 1 or 0. It represents the randomization Likelihood for the random function. The default setting is 50%.
 
 ```{r, fig.height=4, fig.width=4}
 # Import raw data (exmpl: mouse data)
@@ -74,7 +73,6 @@ raw_mouse  <- tiefightR::mouse
 # NOTE: the binarized set is calculated with a constant seeding.
 # You can change this w/ setseed = FALSE!
 bin_mouse  <- tie_binarize(xdata      = raw_mouse,
-                           SV         = "side",
                            RF         = "fluidType",
                            CF         = "combinationWith",
                            id         = "animalID",
@@ -85,7 +83,6 @@ bin_mouse  <- tie_binarize(xdata      = raw_mouse,
 
 # calculate worth values w/ the binarized data
 mouse1      <- tie_worth(xdata         = bin_mouse,
-                        SV            = "side_img1",
                         RF            = "img1",
                         CF            = "img2",
                         id            = "ID",
@@ -157,7 +154,6 @@ testme      <- "Lake"
 sim_humans  <- tie_sim(xdata     = raw,
                        R         = 2,           # No. of randomizations (here=3 to keep things easy)
                        cpus      = 6,           # enter the no- of CPUs
-                       SV        = "side_img1",
                        RF        = "img1",
                        CF        = "img2",
                        id        = "ID",
